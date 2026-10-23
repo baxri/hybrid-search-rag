@@ -1,0 +1,527 @@
+[
+  {
+    "id": "3394",
+    "text": "What is the easiest way to back-test index funds and ETFs?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "445971",
+      "342258",
+      "129319",
+      "570664"
+    ]
+  },
+  {
+    "id": "5505",
+    "text": "Can I deduct interest and fees on a loan for qualified medical expenses?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "100387"
+    ]
+  },
+  {
+    "id": "6792",
+    "text": "Where to find the full book of outstanding bids/asks for a stock?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "485973"
+    ]
+  },
+  {
+    "id": "6909",
+    "text": "Why do stocks priced above $2.00 on the ASX sometimes move in $0.005 increments?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "127012"
+    ]
+  },
+  {
+    "id": "4946",
+    "text": "Something looks off about Mitsubishi financial data",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "121690"
+    ]
+  },
+  {
+    "id": "4125",
+    "text": "Alternative means of salary for my employees",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "344648",
+      "72046"
+    ]
+  },
+  {
+    "id": "6009",
+    "text": "Why can low volume move a stock price drastically?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "228983"
+    ]
+  },
+  {
+    "id": "9598",
+    "text": "How do index funds actually work?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "379311"
+    ]
+  },
+  {
+    "id": "10645",
+    "text": "Explain the details and benefits of rebalancing a retirement portfolio?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "588607",
+      "22221"
+    ]
+  },
+  {
+    "id": "7441",
+    "text": "Since many brokers disallow investors from shorting sub-$5 stocks, why don't all companies split their stock until it is sub-$5",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "537418",
+      "514500",
+      "117576"
+    ]
+  },
+  {
+    "id": "5080",
+    "text": "Is there a standard or best practice way to handle money from an expiring UTMA account?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "256055"
+    ]
+  },
+  {
+    "id": "9329",
+    "text": "Interactive Brokers: IOPTS and list of structured products",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "523913",
+      "326991"
+    ]
+  },
+  {
+    "id": "6479",
+    "text": "Trading on exchanges or via brokerage companies?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "272008",
+      "404339"
+    ]
+  },
+  {
+    "id": "8513",
+    "text": "Buy on dip when earnings fail?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "270573"
+    ]
+  },
+  {
+    "id": "10109",
+    "text": "Why does Charles Schwab have a Mandatory Settlement Period after selling stocks?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "28314",
+      "506374",
+      "93231",
+      "156029",
+      "406974",
+      "499849",
+      "566591"
+    ]
+  },
+  {
+    "id": "4844",
+    "text": "How to read bond yield quotes? What do the time, coupon, price, yield, and time mean?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "275257",
+      "192193"
+    ]
+  },
+  {
+    "id": "8544",
+    "text": "Strategies to recover from a bad short-term call options purchase where the underlying dropped instead?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "214003",
+      "267113"
+    ]
+  },
+  {
+    "id": "4823",
+    "text": "Close to retirement & we may move within 7 years. Should we re-finance our mortgage, or not?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "104726",
+      "362919",
+      "561929"
+    ]
+  },
+  {
+    "id": "1085",
+    "text": "How do disputed debts work on credit reports?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "467737",
+      "393710"
+    ]
+  },
+  {
+    "id": "2388",
+    "text": "Do financial advisors get better deals on mortgages?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "104988"
+    ]
+  },
+  {
+    "id": "6891",
+    "text": "What is the theory behind Rick Van Ness's risk calculation in the video about diversification?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "277217",
+      "463837",
+      "474351"
+    ]
+  },
+  {
+    "id": "2568",
+    "text": "How to pay with cash when car shopping?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "139047",
+      "388798",
+      "296769",
+      "346042",
+      "108739",
+      "590082",
+      "127353"
+    ]
+  },
+  {
+    "id": "7702",
+    "text": "Bond ETFs vs actual bonds",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "387277",
+      "558924"
+    ]
+  },
+  {
+    "id": "2376",
+    "text": "Why do gas stations charge different amounts in the same local area?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "64263",
+      "549833",
+      "91545",
+      "324411",
+      "114417",
+      "407455",
+      "402249",
+      "244961"
+    ]
+  },
+  {
+    "id": "4339",
+    "text": "What could happen to Detroit Municipal bonds because of Detroit's filing for bankruptcy?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "386531",
+      "488615"
+    ]
+  },
+  {
+    "id": "5427",
+    "text": "How do auto-loan payments factor into taxes for cars that are solely used by dependent(s)?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "200603",
+      "323284"
+    ]
+  },
+  {
+    "id": "7734",
+    "text": "Can PE ratio of stocks be compared to other investments?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "226070",
+      "433905"
+    ]
+  },
+  {
+    "id": "2486",
+    "text": "Is working on a W2 basis, with benefits paid to me, a good idea?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "487791"
+    ]
+  },
+  {
+    "id": "7071",
+    "text": "ESPP strategy - Sell right away or hold?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "124230",
+      "238629"
+    ]
+  },
+  {
+    "id": "8537",
+    "text": "What is an “Options Account”?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "6574"
+    ]
+  },
+  {
+    "id": "7178",
+    "text": "Should an ADR that is being delisted be sold off?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "401329"
+    ]
+  },
+  {
+    "id": "4777",
+    "text": "How to finance necessary repairs to our home in order to sell it?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "590710"
+    ]
+  },
+  {
+    "id": "2398",
+    "text": "Frustrated Landlord",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "118730",
+      "509391",
+      "363810",
+      "224654",
+      "590489"
+    ]
+  },
+  {
+    "id": "849",
+    "text": "Accounting for reimbursements that exceed actual expenses",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "557186"
+    ]
+  },
+  {
+    "id": "7534",
+    "text": "Can you explain why it's better to invest now rather than waiting for the market to dip?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "175821",
+      "89714",
+      "358125"
+    ]
+  },
+  {
+    "id": "5021",
+    "text": "Is there a more flexible stock chart service, e.g. permitting choice of colours when comparing multiple stocks?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "589285"
+    ]
+  },
+  {
+    "id": "6131",
+    "text": "Is it ever a good idea to close credit cards?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "326094",
+      "365263",
+      "218088",
+      "252534",
+      "381720",
+      "235452",
+      "170204",
+      "416679",
+      "334111",
+      "2460",
+      "368806",
+      "258465"
+    ]
+  },
+  {
+    "id": "10136",
+    "text": "How to minimise the risk of a reduction in purchase power in case of Brexit for money held in a bank account?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "526115",
+      "152316",
+      "290930"
+    ]
+  },
+  {
+    "id": "9548",
+    "text": "How do I research, analyze, and choose the right mutual fund for a roth ira?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "297290"
+    ]
+  },
+  {
+    "id": "4942",
+    "text": "find stock composition of a publicly traded fund",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "357685"
+    ]
+  },
+  {
+    "id": "5090",
+    "text": "Should I take a student loan to pursue my undergraduate studies in France?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "436493",
+      "12988"
+    ]
+  },
+  {
+    "id": "6005",
+    "text": "Why might it be advisable to keep student debt vs. paying it off quickly?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "135415",
+      "478457",
+      "345895",
+      "73310",
+      "384626",
+      "176498",
+      "149500",
+      "572272",
+      "414288",
+      "507544",
+      "390689",
+      "414534",
+      "270856"
+    ]
+  },
+  {
+    "id": "7533",
+    "text": "Investing tax (savings)",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "162668",
+      "93853"
+    ]
+  },
+  {
+    "id": "8034",
+    "text": "What is the average cost of a portfolio on a trading site?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "597351"
+    ]
+  },
+  {
+    "id": "2330",
+    "text": "How can I determine if a debt consolidation offer is real or a scam?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "478514",
+      "104221"
+    ]
+  },
+  {
+    "id": "7803",
+    "text": "Can the Delta be used to calculate the option premium given a certain target?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "565926",
+      "157504"
+    ]
+  },
+  {
+    "id": "1933",
+    "text": "UK sole trader who often buys products/services on behalf of clients – do I deduct from declared income or claim as allowable expenses?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "183612"
+    ]
+  },
+  {
+    "id": "6849",
+    "text": "What do the points in a stock market index epresent?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "44601"
+    ]
+  },
+  {
+    "id": "7448",
+    "text": "If an index goes up because an underlying company issues more shares, what happens to the ETF",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "418150"
+    ]
+  },
+  {
+    "id": "42",
+    "text": "What are the ins/outs of writing equipment purchases off as business expenses in a home based business?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "272709",
+      "327263",
+      "331981"
+    ]
+  },
+  {
+    "id": "u1",
+    "text": "What is Tesla's stock price today?",
+    "kind": "unanswerable",
+    "relevant_doc_ids": []
+  },
+  {
+    "id": "u2",
+    "text": "What is the current 30-year fixed mortgage rate?",
+    "kind": "unanswerable",
+    "relevant_doc_ids": []
+  },
+  {
+    "id": "u3",
+    "text": "How much money is in my 401(k) right now?",
+    "kind": "unanswerable",
+    "relevant_doc_ids": []
+  },
+  {
+    "id": "u4",
+    "text": "What was my credit score last month?",
+    "kind": "unanswerable",
+    "relevant_doc_ids": []
+  },
+  {
+    "id": "u5",
+    "text": "Who won the 2022 FIFA World Cup?",
+    "kind": "unanswerable",
+    "relevant_doc_ids": []
+  },
+  {
+    "id": "u6",
+    "text": "What is a good recipe for banana bread?",
+    "kind": "unanswerable",
+    "relevant_doc_ids": []
+  },
+  {
+    "id": "u7",
+    "text": "What are the 2026 IRS contribution limits for a Roth IRA?",
+    "kind": "unanswerable",
+    "relevant_doc_ids": []
+  },
+  {
+    "id": "u8",
+    "text": "How did the 2025 tax law change the standard deduction?",
+    "kind": "unanswerable",
+    "relevant_doc_ids": []
+  }
+]
