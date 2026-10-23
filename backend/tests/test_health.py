@@ -10,3 +10,16 @@ def test_health_ok():
 
     assert response.status_code == 200
     assert response.json() == {"status": "ok"}
+
+
+def test_startup_builds_real_pipeline_when_none_injected(monkeypatch):
+    built = FakePipeline()
+    monkeypatch.setattr("app.main.get_settings", lambda: "settings")
+    monkeypatch.setattr(
+        "app.main.HybridPipeline.from_settings",
+        lambda settings: built if settings == "settings" else None,
+    )
+
+    app = create_app()
+    with TestClient(app):
+        assert app.state.pipeline is built
