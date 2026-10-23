@@ -5,7 +5,7 @@ from tests.conftest import FakePipeline
 
 
 def test_health_ok():
-    with TestClient(create_app(pipeline=FakePipeline())) as client:
+    with TestClient(create_app(pipeline=FakePipeline(), model="test")) as client:
         response = client.get("/api/health")
 
     assert response.status_code == 200
@@ -20,6 +20,6 @@ def test_startup_builds_real_pipeline_when_none_injected(monkeypatch):
         lambda settings: built if settings == "settings" else None,
     )
 
-    app = create_app()
+    app = create_app(model="test")
     with TestClient(app):
         assert app.state.pipeline is built

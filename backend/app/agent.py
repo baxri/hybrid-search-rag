@@ -8,6 +8,7 @@ from pydantic_ai.models import Model
 
 from app.citations import SourceRegistry, format_for_model
 from app.retrieval.pipeline import HybridPipeline
+from app.schemas import SearchTrace, Source
 
 INSTRUCTIONS = """\
 You answer personal-finance questions using posts from the FiQA forum corpus.
@@ -28,6 +29,15 @@ class ChatDeps:
     searches: int = 0
 
 
+@dataclass
+class SearchMetadata:
+    """Rides on the tool result for the stream to forward; never sent to the model."""
+
+    search_id: int
+    trace: SearchTrace
+    sources: list[Source]  # newly numbered in this search
+
+
 async def search_finance_posts(ctx: RunContext[ChatDeps], query: str) -> ToolReturn:
     """Search the FiQA personal-finance forum (BM25 + embeddings, fused and reranked).
 
@@ -46,11 +56,7 @@ async def search_finance_posts(ctx: RunContext[ChatDeps], query: str) -> ToolRet
     # metadata, which is never sent to the model, for the stream to forward to the UI.
     return ToolReturn(
         return_value=format_for_model(this_search),
-        metadata={
-            "search_id": search_id,
-            "trace": trace.model_dump(),
-            "sources": [s.model_dump() for s in newly_numbered],
-        },
+        metadata=SearchMetadata(search_id=search_id, trace=trace, sources=newly_numbered),
     )
 
 

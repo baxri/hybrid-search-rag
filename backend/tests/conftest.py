@@ -1,3 +1,8 @@
+from collections.abc import AsyncIterator
+
+from pydantic_ai.messages import ModelMessage
+from pydantic_ai.models.function import AgentInfo, DeltaToolCall, FunctionModel
+
 from app.retrieval.corpus import Corpus
 from app.schemas import RankedDoc, SearchTrace, Stage
 from tests.fixtures import FIXTURE_DOCS
@@ -31,3 +36,22 @@ class FakePipeline:
         if self.error:
             raise self.error
         return canned_trace(query, self.ranking)
+
+
+def scripted_model(queries: list[str], answer: str = "Use a savings account [1].") -> FunctionModel:
+    """Calls search_finance_posts once per query (one per model step), then streams `answer`."""
+
+    async def stream(messages: list[ModelMessage], info: AgentInfo) -> AsyncIterator:
+        searches_done = sum(1 for m in messages for p in m.parts if p.part_kind == "tool-return")
+        if searches_done < len(queries):
+            yield {
+                0: DeltaToolCall(
+                    name="search_finance_posts",
+                    json_args=f'{{"query": "{queries[searches_done]}"}}',
+                    tool_call_id=f"call-{searches_done}",
+                )
+            }
+        else:
+            yield answer
+
+    return FunctionModel(stream_function=stream)
