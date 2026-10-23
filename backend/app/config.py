@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     openai_api_key: str
     cohere_api_key: str
     chat_model: str = "gpt-5.4-mini"
+    judge_model: str = "gpt-5.4-mini"  # evals only; same as chat for now (owner decision)
 
     # Layout: corpus.parquet, embeddings.npy, bm25/
     data_dir: Path = BACKEND_DIR / "data"
