@@ -28,17 +28,22 @@ class SourceRegistry:
     def add(self, trace: SearchTrace, corpus: Corpus) -> tuple[list[Source], list[Source]]:
         """Register the reranked posts of one search. Returns (this_search, newly_numbered)."""
         rerank = next(stage for stage in trace.stages if stage.name == "rerank")
+
         this_search: list[Source] = []
         newly_numbered: list[Source] = []
+
         for doc in rerank.results:
             source = self._by_doc_id.get(doc.doc_id)
+
             if source is None:
                 source = Source(
                     n=len(self._by_doc_id) + 1, doc_id=doc.doc_id, text=corpus.text(doc.doc_id)
                 )
                 self._by_doc_id[doc.doc_id] = source
                 newly_numbered.append(source)
+
             this_search.append(source)
+
         return this_search, newly_numbered
 
 
