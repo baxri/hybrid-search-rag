@@ -15,9 +15,12 @@ Embedder = Callable[[str], Awaitable[np.ndarray]]
 
 class DenseRetriever:
     def __init__(self, embeddings_path: Path, doc_ids: list[str], embed: Embedder) -> None:
-        raw = np.load(embeddings_path)
-        # Normalize once so cosine similarity is a single dot product per query.
-        self._embeddings = raw / np.linalg.norm(raw, axis=1, keepdims=True)
+        embeddings = np.load(embeddings_path)
+        # Normalize once so cosine similarity is a single dot product per query. In place, and
+        # with einsum for the row norms (np.linalg.norm builds a full-size x*x temporary): any
+        # second copy of the 354 MB matrix would overflow a 1 GB host at startup.
+        embeddings /= np.sqrt(np.einsum("ij,ij->i", embeddings, embeddings))[:, None]
+        self._embeddings = embeddings
         self._doc_ids = doc_ids
         self._embed = embed
 
