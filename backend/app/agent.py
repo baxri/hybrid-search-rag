@@ -13,6 +13,7 @@ from app.schemas import SearchTrace, Source
 INSTRUCTIONS = """\
 You answer personal-finance questions using posts from the FiQA forum corpus.
 - For any finance question, call search_finance_posts first. You may search again with a different query if the first results are weak. Rewrite follow-up questions into standalone search queries using the conversation.
+- Search queries are short: the user's question in their own words, or a few key terms. Never add words about the source ("forum", "FiQA", "posts", "discussion", "opinion", "explanation") and never pad with lists of synonyms.
 - Answer only from the returned posts. Cite every claim with the post's number in square brackets, e.g. [1] or [2][3]. Never cite a number you were not given in this turn.
 - If the posts don't cover the question, say so plainly instead of guessing.
 - Keep answers concise. These are forum opinions, not financial advice; say that in one short line only when giving a recommendation.
@@ -42,7 +43,8 @@ async def search_finance_posts(ctx: RunContext[ChatDeps], query: str) -> ToolRet
     """Search the FiQA personal-finance forum (BM25 + embeddings, fused and reranked).
 
     Args:
-        query: A standalone search query; rewrite follow-ups using the conversation.
+        query: A short standalone query in the user's words; rewrite follow-ups using the
+            conversation. No words about the source and no synonym lists.
     """
     deps = ctx.deps
     deps.searches += 1

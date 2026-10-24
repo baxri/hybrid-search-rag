@@ -43,3 +43,64 @@ async def test_a_judge_crash_is_recorded_on_that_question():
     assert results[0].judgement is None
     assert results[0].error is not None and "judge" in results[0].error.lower()
     assert results[0].failed is True
+
+
+def test_each_run_is_archived_and_published_as_latest(tmp_path):
+    from evals.report import EvalReport, RunMeta, summarize
+    from evals.run import write_report
+
+    meta = RunMeta(
+        date="2026-10-23T09:05:07+00:00",
+        commit="abc1234-dirty",
+        answer_model="m",
+        judge_model="m",
+        seed=42,
+        question_count=0,
+    )
+    report = EvalReport(meta=meta, summary=summarize([]), results=[])
+    latest, runs = tmp_path / "public" / "results.json", tmp_path / "runs"
+
+    first = write_report(report, latest, runs)
+    second = write_report(
+        report.model_copy(
+            update={"meta": meta.model_copy(update={"date": "2026-10-23T10:00:00+00:00"})}
+        ),
+        latest,
+        runs,
+    )
+
+    assert first.name == "2026-10-23T09-05-07_abc1234-dirty_n0.json"
+    assert sorted(p.name for p in runs.iterdir()) == [first.name, second.name]
+    assert latest.read_text() == second.read_text()
+
+
+class FlakyPipeline(FakePipeline):
+    """Fails the first `failures` searches, like a rate-limited reranker, then recovers."""
+
+    def __init__(self, failures: int) -> None:
+        super().__init__()
+        self.failures = failures
+
+    async def search(self, query: str):
+        if self.failures:
+            self.failures -= 1
+            raise RuntimeError("429 Too Many Requests")
+        return await super().search(query)
+
+
+async def test_a_failed_question_is_retried_after_a_wait():
+    agent = build_agent(scripted_model(["emergency fund"]))
+    judge = build_judge(TestModel(custom_output_args=VERDICT))
+
+    results = await evaluate(QUESTIONS[:1], agent, FlakyPipeline(failures=1), judge, retry_wait=0)
+
+    assert results[0].error is None and not results[0].failed
+
+
+async def test_retries_give_up_and_keep_the_error():
+    agent = build_agent(scripted_model(["emergency fund"]))
+    judge = build_judge(TestModel(custom_output_args=VERDICT))
+
+    results = await evaluate(QUESTIONS[:1], agent, FlakyPipeline(failures=99), judge, retry_wait=0)
+
+    assert results[0].error is not None and results[0].failed

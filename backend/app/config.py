@@ -16,7 +16,6 @@ class Settings(BaseSettings):
 
     # Layout: corpus.parquet, embeddings.npy, bm25/
     data_dir: Path = BACKEND_DIR / "data"
-    hf_repo: str = "baxri/fiqa-hybrid-indexes"
 
     candidate_k: int = 50
     top_k: int = 8

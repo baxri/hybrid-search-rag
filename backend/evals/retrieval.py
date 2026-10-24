@@ -30,6 +30,7 @@ def score_retrieval(searches: list[SearchTrace], relevant: list[str]) -> Retriev
         if r.doc_id in wanted
     ]
     first_rank = min(ranks, default=None)
+
     return RetrievalScore(
         hit=first_rank is not None,
         first_rank=first_rank,

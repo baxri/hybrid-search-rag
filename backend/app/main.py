@@ -1,20 +1,27 @@
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
+from pathlib import Path
 
-from fastapi import FastAPI, Request
-from fastapi.responses import StreamingResponse
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import FileResponse, StreamingResponse
 from pydantic_ai.models import Model
 from pydantic_ai.models.openai import OpenAIResponsesModel
 from pydantic_ai.providers.openai import OpenAIProvider
 
 from app.agent import build_agent
-from app.config import get_settings
+from app.config import BACKEND_DIR, get_settings
 from app.retrieval.pipeline import HybridPipeline
 from app.schemas import ChatRequest
 from app.stream import chat_events
 
+FRONTEND_DIR = BACKEND_DIR.parent / "frontend" / "dist"
 
-def create_app(pipeline: HybridPipeline | None = None, model: Model | str | None = None) -> FastAPI:
+
+def create_app(
+    pipeline: HybridPipeline | None = None,
+    model: Model | str | None = None,
+    frontend_dir: Path = FRONTEND_DIR,
+) -> FastAPI:
     """Build the app. Tests inject a fake pipeline and model; production loads real ones at startup."""
 
     @asynccontextmanager
@@ -44,7 +51,24 @@ def create_app(pipeline: HybridPipeline | None = None, model: Model | str | None
             media_type="application/x-ndjson",
         )
 
+    if frontend_dir.is_dir():
+        _serve_frontend(app, frontend_dir.resolve())
+
     return app
+
+
+def _serve_frontend(app: FastAPI, root: Path) -> None:
+    """Serve the built React app from the same origin: real files as-is, any other path gets
+    index.html so the app's own routing takes over. Registered last, so /api/* wins."""
+
+    @app.get("/{path:path}", include_in_schema=False)
+    async def frontend(path: str) -> FileResponse:
+        if path == "api" or path.startswith("api/"):
+            raise HTTPException(status_code=404)
+        file = (root / path).resolve()
+        if file.is_file() and file.is_relative_to(root):
+            return FileResponse(file)
+        return FileResponse(root / "index.html")
 
 
 app = create_app()

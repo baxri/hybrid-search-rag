@@ -23,8 +23,10 @@ forum posts it was given, citing them as [n].
    An honest "the posts don't cover this" to an unanswerable question is a 5.
 2. declined: true if the answer says the posts don't cover the question instead of answering it.
 3. claims: split the answer into its factual claims about finance or the world. Skip \
-disclaimers ("not financial advice"), greetings, and statements that the posts don't cover \
-something. For each claim give the [n] numbers it cites and a verdict:
+disclaimers ("not financial advice"), greetings, and anything the answer says about the posts \
+or its own search ("I couldn't find this in the posts", "the results only discuss X"): those \
+are not claims. An answer that only declines has no claims. For each claim give the [n] \
+numbers it cites and a verdict:
    - supported: a cited post states it or clearly implies it.
    - unsupported: it cites posts, but none of them backs it.
    - uncited: it has no citation.

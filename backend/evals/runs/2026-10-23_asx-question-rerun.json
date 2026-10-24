@@ -1,0 +1,917 @@
+{
+  "question": {
+    "id": "6909",
+    "text": "Why do stocks priced above $2.00 on the ASX sometimes move in $0.005 increments?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "127012"
+    ]
+  },
+  "transcript": {
+    "searches": [
+      {
+        "query": "ASX stocks above $2 move in 0.005 increments why tick size 0.005 above $2.00",
+        "total_ms": 2542.562708025798,
+        "stages": [
+          {
+            "name": "bm25",
+            "ms": 27.29245799127966,
+            "results": [
+              {
+                "doc_id": "436128",
+                "rank": 1,
+                "score": 10.679980278015137
+              },
+              {
+                "doc_id": "382339",
+                "rank": 2,
+                "score": 8.625631332397461
+              },
+              {
+                "doc_id": "507656",
+                "rank": 3,
+                "score": 8.360078811645508
+              },
+              {
+                "doc_id": "363043",
+                "rank": 4,
+                "score": 8.211788177490234
+              },
+              {
+                "doc_id": "384850",
+                "rank": 5,
+                "score": 7.865972995758057
+              },
+              {
+                "doc_id": "256195",
+                "rank": 6,
+                "score": 7.854564666748047
+              },
+              {
+                "doc_id": "582650",
+                "rank": 7,
+                "score": 7.546456813812256
+              },
+              {
+                "doc_id": "376399",
+                "rank": 8,
+                "score": 7.289322853088379
+              },
+              {
+                "doc_id": "310837",
+                "rank": 9,
+                "score": 7.263959884643555
+              },
+              {
+                "doc_id": "464452",
+                "rank": 10,
+                "score": 7.0982346534729
+              },
+              {
+                "doc_id": "211650",
+                "rank": 11,
+                "score": 7.040303707122803
+              },
+              {
+                "doc_id": "358164",
+                "rank": 12,
+                "score": 6.9442901611328125
+              },
+              {
+                "doc_id": "451936",
+                "rank": 13,
+                "score": 6.8477020263671875
+              },
+              {
+                "doc_id": "331835",
+                "rank": 14,
+                "score": 6.748780250549316
+              },
+              {
+                "doc_id": "126885",
+                "rank": 15,
+                "score": 6.51597785949707
+              },
+              {
+                "doc_id": "168080",
+                "rank": 16,
+                "score": 6.49778413772583
+              },
+              {
+                "doc_id": "139089",
+                "rank": 17,
+                "score": 6.494256496429443
+              },
+              {
+                "doc_id": "469795",
+                "rank": 18,
+                "score": 6.34736967086792
+              },
+              {
+                "doc_id": "331295",
+                "rank": 19,
+                "score": 6.250863552093506
+              },
+              {
+                "doc_id": "103719",
+                "rank": 20,
+                "score": 6.247761249542236
+              },
+              {
+                "doc_id": "389268",
+                "rank": 21,
+                "score": 6.178180694580078
+              },
+              {
+                "doc_id": "122012",
+                "rank": 22,
+                "score": 6.134308815002441
+              },
+              {
+                "doc_id": "9152",
+                "rank": 23,
+                "score": 6.110437870025635
+              },
+              {
+                "doc_id": "316296",
+                "rank": 24,
+                "score": 6.09908390045166
+              },
+              {
+                "doc_id": "281223",
+                "rank": 25,
+                "score": 6.097141265869141
+              },
+              {
+                "doc_id": "305579",
+                "rank": 26,
+                "score": 6.068158149719238
+              },
+              {
+                "doc_id": "375161",
+                "rank": 27,
+                "score": 6.018908500671387
+              },
+              {
+                "doc_id": "433471",
+                "rank": 28,
+                "score": 5.977148532867432
+              },
+              {
+                "doc_id": "155151",
+                "rank": 29,
+                "score": 5.955416202545166
+              },
+              {
+                "doc_id": "420118",
+                "rank": 30,
+                "score": 5.930643081665039
+              },
+              {
+                "doc_id": "59638",
+                "rank": 31,
+                "score": 5.930354118347168
+              },
+              {
+                "doc_id": "158511",
+                "rank": 32,
+                "score": 5.917832374572754
+              },
+              {
+                "doc_id": "370630",
+                "rank": 33,
+                "score": 5.909431457519531
+              },
+              {
+                "doc_id": "131774",
+                "rank": 34,
+                "score": 5.809205055236816
+              },
+              {
+                "doc_id": "88398",
+                "rank": 35,
+                "score": 5.809008598327637
+              },
+              {
+                "doc_id": "162768",
+                "rank": 36,
+                "score": 5.798541069030762
+              },
+              {
+                "doc_id": "14368",
+                "rank": 37,
+                "score": 5.784470558166504
+              },
+              {
+                "doc_id": "435160",
+                "rank": 38,
+                "score": 5.746087074279785
+              },
+              {
+                "doc_id": "280992",
+                "rank": 39,
+                "score": 5.739858150482178
+              },
+              {
+                "doc_id": "450878",
+                "rank": 40,
+                "score": 5.698228359222412
+              },
+              {
+                "doc_id": "102026",
+                "rank": 41,
+                "score": 5.674078941345215
+              },
+              {
+                "doc_id": "535454",
+                "rank": 42,
+                "score": 5.667945384979248
+              },
+              {
+                "doc_id": "345851",
+                "rank": 43,
+                "score": 5.660937309265137
+              },
+              {
+                "doc_id": "298367",
+                "rank": 44,
+                "score": 5.620227336883545
+              },
+              {
+                "doc_id": "84642",
+                "rank": 45,
+                "score": 5.518227577209473
+              },
+              {
+                "doc_id": "327533",
+                "rank": 46,
+                "score": 5.512526035308838
+              },
+              {
+                "doc_id": "275199",
+                "rank": 47,
+                "score": 5.509965419769287
+              },
+              {
+                "doc_id": "241059",
+                "rank": 48,
+                "score": 5.502857208251953
+              },
+              {
+                "doc_id": "415947",
+                "rank": 49,
+                "score": 5.490426063537598
+              },
+              {
+                "doc_id": "88964",
+                "rank": 50,
+                "score": 5.484677791595459
+              }
+            ]
+          },
+          {
+            "name": "dense",
+            "ms": 1250.5972089711577,
+            "results": [
+              {
+                "doc_id": "72633",
+                "rank": 1,
+                "score": 0.5338672399520874
+              },
+              {
+                "doc_id": "318774",
+                "rank": 2,
+                "score": 0.5338265299797058
+              },
+              {
+                "doc_id": "228983",
+                "rank": 3,
+                "score": 0.5047478079795837
+              },
+              {
+                "doc_id": "347992",
+                "rank": 4,
+                "score": 0.4976465702056885
+              },
+              {
+                "doc_id": "44601",
+                "rank": 5,
+                "score": 0.4963364005088806
+              },
+              {
+                "doc_id": "514500",
+                "rank": 6,
+                "score": 0.4835284948348999
+              },
+              {
+                "doc_id": "598855",
+                "rank": 7,
+                "score": 0.48287785053253174
+              },
+              {
+                "doc_id": "490584",
+                "rank": 8,
+                "score": 0.4817868173122406
+              },
+              {
+                "doc_id": "435963",
+                "rank": 9,
+                "score": 0.4800988435745239
+              },
+              {
+                "doc_id": "285126",
+                "rank": 10,
+                "score": 0.4771002531051636
+              },
+              {
+                "doc_id": "134430",
+                "rank": 11,
+                "score": 0.4761328399181366
+              },
+              {
+                "doc_id": "304580",
+                "rank": 12,
+                "score": 0.47564059495925903
+              },
+              {
+                "doc_id": "78138",
+                "rank": 13,
+                "score": 0.4732438921928406
+              },
+              {
+                "doc_id": "196640",
+                "rank": 14,
+                "score": 0.47305411100387573
+              },
+              {
+                "doc_id": "410123",
+                "rank": 15,
+                "score": 0.4729824960231781
+              },
+              {
+                "doc_id": "367047",
+                "rank": 16,
+                "score": 0.47244852781295776
+              },
+              {
+                "doc_id": "63044",
+                "rank": 17,
+                "score": 0.47125673294067383
+              },
+              {
+                "doc_id": "436652",
+                "rank": 18,
+                "score": 0.4664243459701538
+              },
+              {
+                "doc_id": "380351",
+                "rank": 19,
+                "score": 0.46639496088027954
+              },
+              {
+                "doc_id": "250761",
+                "rank": 20,
+                "score": 0.4660034775733948
+              },
+              {
+                "doc_id": "80289",
+                "rank": 21,
+                "score": 0.46421778202056885
+              },
+              {
+                "doc_id": "375019",
+                "rank": 22,
+                "score": 0.46348291635513306
+              },
+              {
+                "doc_id": "414088",
+                "rank": 23,
+                "score": 0.46127253770828247
+              },
+              {
+                "doc_id": "467852",
+                "rank": 24,
+                "score": 0.46073126792907715
+              },
+              {
+                "doc_id": "43432",
+                "rank": 25,
+                "score": 0.460538387298584
+              },
+              {
+                "doc_id": "524940",
+                "rank": 26,
+                "score": 0.46038544178009033
+              },
+              {
+                "doc_id": "594948",
+                "rank": 27,
+                "score": 0.46007999777793884
+              },
+              {
+                "doc_id": "33357",
+                "rank": 28,
+                "score": 0.45946434140205383
+              },
+              {
+                "doc_id": "522907",
+                "rank": 29,
+                "score": 0.4584469497203827
+              },
+              {
+                "doc_id": "373403",
+                "rank": 30,
+                "score": 0.4580456018447876
+              },
+              {
+                "doc_id": "241860",
+                "rank": 31,
+                "score": 0.45796260237693787
+              },
+              {
+                "doc_id": "339268",
+                "rank": 32,
+                "score": 0.4578515291213989
+              },
+              {
+                "doc_id": "349668",
+                "rank": 33,
+                "score": 0.45673298835754395
+              },
+              {
+                "doc_id": "165973",
+                "rank": 34,
+                "score": 0.4552258253097534
+              },
+              {
+                "doc_id": "367547",
+                "rank": 35,
+                "score": 0.45420557260513306
+              },
+              {
+                "doc_id": "433471",
+                "rank": 36,
+                "score": 0.4521642327308655
+              },
+              {
+                "doc_id": "484190",
+                "rank": 37,
+                "score": 0.4517762064933777
+              },
+              {
+                "doc_id": "317148",
+                "rank": 38,
+                "score": 0.4507450461387634
+              },
+              {
+                "doc_id": "429418",
+                "rank": 39,
+                "score": 0.4505614638328552
+              },
+              {
+                "doc_id": "505865",
+                "rank": 40,
+                "score": 0.4503421187400818
+              },
+              {
+                "doc_id": "227669",
+                "rank": 41,
+                "score": 0.4502907991409302
+              },
+              {
+                "doc_id": "91831",
+                "rank": 42,
+                "score": 0.4501640796661377
+              },
+              {
+                "doc_id": "241963",
+                "rank": 43,
+                "score": 0.449981689453125
+              },
+              {
+                "doc_id": "102026",
+                "rank": 44,
+                "score": 0.44934406876564026
+              },
+              {
+                "doc_id": "79998",
+                "rank": 45,
+                "score": 0.44813185930252075
+              },
+              {
+                "doc_id": "28604",
+                "rank": 46,
+                "score": 0.44779711961746216
+              },
+              {
+                "doc_id": "389268",
+                "rank": 47,
+                "score": 0.44721096754074097
+              },
+              {
+                "doc_id": "554207",
+                "rank": 48,
+                "score": 0.4465741515159607
+              },
+              {
+                "doc_id": "87238",
+                "rank": 49,
+                "score": 0.4465681314468384
+              },
+              {
+                "doc_id": "305360",
+                "rank": 50,
+                "score": 0.44576194882392883
+              }
+            ]
+          },
+          {
+            "name": "rrf",
+            "ms": 0.4737910348922014,
+            "results": [
+              {
+                "doc_id": "433471",
+                "rank": 1,
+                "score": 0.021780303030303032
+              },
+              {
+                "doc_id": "389268",
+                "rank": 2,
+                "score": 0.021691473404869044
+              },
+              {
+                "doc_id": "102026",
+                "rank": 3,
+                "score": 0.01951637471439452
+              },
+              {
+                "doc_id": "436128",
+                "rank": 4,
+                "score": 0.01639344262295082
+              },
+              {
+                "doc_id": "72633",
+                "rank": 5,
+                "score": 0.01639344262295082
+              },
+              {
+                "doc_id": "382339",
+                "rank": 6,
+                "score": 0.016129032258064516
+              },
+              {
+                "doc_id": "318774",
+                "rank": 7,
+                "score": 0.016129032258064516
+              },
+              {
+                "doc_id": "507656",
+                "rank": 8,
+                "score": 0.015873015873015872
+              },
+              {
+                "doc_id": "228983",
+                "rank": 9,
+                "score": 0.015873015873015872
+              },
+              {
+                "doc_id": "363043",
+                "rank": 10,
+                "score": 0.015625
+              },
+              {
+                "doc_id": "347992",
+                "rank": 11,
+                "score": 0.015625
+              },
+              {
+                "doc_id": "384850",
+                "rank": 12,
+                "score": 0.015384615384615385
+              },
+              {
+                "doc_id": "44601",
+                "rank": 13,
+                "score": 0.015384615384615385
+              },
+              {
+                "doc_id": "256195",
+                "rank": 14,
+                "score": 0.015151515151515152
+              },
+              {
+                "doc_id": "514500",
+                "rank": 15,
+                "score": 0.015151515151515152
+              },
+              {
+                "doc_id": "582650",
+                "rank": 16,
+                "score": 0.014925373134328358
+              },
+              {
+                "doc_id": "598855",
+                "rank": 17,
+                "score": 0.014925373134328358
+              },
+              {
+                "doc_id": "376399",
+                "rank": 18,
+                "score": 0.014705882352941176
+              },
+              {
+                "doc_id": "490584",
+                "rank": 19,
+                "score": 0.014705882352941176
+              },
+              {
+                "doc_id": "310837",
+                "rank": 20,
+                "score": 0.014492753623188406
+              },
+              {
+                "doc_id": "435963",
+                "rank": 21,
+                "score": 0.014492753623188406
+              },
+              {
+                "doc_id": "464452",
+                "rank": 22,
+                "score": 0.014285714285714285
+              },
+              {
+                "doc_id": "285126",
+                "rank": 23,
+                "score": 0.014285714285714285
+              },
+              {
+                "doc_id": "211650",
+                "rank": 24,
+                "score": 0.014084507042253521
+              },
+              {
+                "doc_id": "134430",
+                "rank": 25,
+                "score": 0.014084507042253521
+              },
+              {
+                "doc_id": "358164",
+                "rank": 26,
+                "score": 0.013888888888888888
+              },
+              {
+                "doc_id": "304580",
+                "rank": 27,
+                "score": 0.013888888888888888
+              },
+              {
+                "doc_id": "451936",
+                "rank": 28,
+                "score": 0.0136986301369863
+              },
+              {
+                "doc_id": "78138",
+                "rank": 29,
+                "score": 0.0136986301369863
+              },
+              {
+                "doc_id": "331835",
+                "rank": 30,
+                "score": 0.013513513513513514
+              },
+              {
+                "doc_id": "196640",
+                "rank": 31,
+                "score": 0.013513513513513514
+              },
+              {
+                "doc_id": "126885",
+                "rank": 32,
+                "score": 0.013333333333333334
+              },
+              {
+                "doc_id": "410123",
+                "rank": 33,
+                "score": 0.013333333333333334
+              },
+              {
+                "doc_id": "168080",
+                "rank": 34,
+                "score": 0.013157894736842105
+              },
+              {
+                "doc_id": "367047",
+                "rank": 35,
+                "score": 0.013157894736842105
+              },
+              {
+                "doc_id": "139089",
+                "rank": 36,
+                "score": 0.012987012987012988
+              },
+              {
+                "doc_id": "63044",
+                "rank": 37,
+                "score": 0.012987012987012988
+              },
+              {
+                "doc_id": "469795",
+                "rank": 38,
+                "score": 0.01282051282051282
+              },
+              {
+                "doc_id": "436652",
+                "rank": 39,
+                "score": 0.01282051282051282
+              },
+              {
+                "doc_id": "331295",
+                "rank": 40,
+                "score": 0.012658227848101266
+              },
+              {
+                "doc_id": "380351",
+                "rank": 41,
+                "score": 0.012658227848101266
+              },
+              {
+                "doc_id": "103719",
+                "rank": 42,
+                "score": 0.0125
+              },
+              {
+                "doc_id": "250761",
+                "rank": 43,
+                "score": 0.0125
+              },
+              {
+                "doc_id": "80289",
+                "rank": 44,
+                "score": 0.012345679012345678
+              },
+              {
+                "doc_id": "122012",
+                "rank": 45,
+                "score": 0.012195121951219513
+              },
+              {
+                "doc_id": "375019",
+                "rank": 46,
+                "score": 0.012195121951219513
+              },
+              {
+                "doc_id": "9152",
+                "rank": 47,
+                "score": 0.012048192771084338
+              },
+              {
+                "doc_id": "414088",
+                "rank": 48,
+                "score": 0.012048192771084338
+              },
+              {
+                "doc_id": "316296",
+                "rank": 49,
+                "score": 0.011904761904761904
+              },
+              {
+                "doc_id": "467852",
+                "rank": 50,
+                "score": 0.011904761904761904
+              }
+            ]
+          },
+          {
+            "name": "rerank",
+            "ms": 1291.0312919411808,
+            "results": [
+              {
+                "doc_id": "375019",
+                "rank": 1,
+                "score": 0.5904014
+              },
+              {
+                "doc_id": "514500",
+                "rank": 2,
+                "score": 0.4761899
+              },
+              {
+                "doc_id": "63044",
+                "rank": 3,
+                "score": 0.45868814
+              },
+              {
+                "doc_id": "139089",
+                "rank": 4,
+                "score": 0.45093963
+              },
+              {
+                "doc_id": "72633",
+                "rank": 5,
+                "score": 0.40131235
+              },
+              {
+                "doc_id": "367047",
+                "rank": 6,
+                "score": 0.39756414
+              },
+              {
+                "doc_id": "44601",
+                "rank": 7,
+                "score": 0.3680422
+              },
+              {
+                "doc_id": "347992",
+                "rank": 8,
+                "score": 0.33598238
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "n": 1,
+        "doc_id": "375019",
+        "text": "Some economist please ELI5 what I’m missing here. In the equities market, it is considered an economic benefit when exchanges settle trades in smaller increments. When we went from eighths to decimal, for example. How is that direction into smaller divisible units different from facilitating trade with pennies for economic goods?"
+      },
+      {
+        "n": 2,
+        "doc_id": "514500",
+        "text": "I do believe it comes down to listing requirements.  That is getting very close to penny stock territory and typical delisting criteria.  I found this answer on Ivestopedia that speaks directly the question of stock price. Another thought is that if everyone were to do it, the rules would change.   The exchanges want to promote price appreciation.  Otherwise, everything trades in a tight band and there is little point to the whole endeavor.  Volatility is another issue that they are concerned about.  At such low stock prices, small changes in stock prices are huge percentage changes.  (As stated in that Ivestopedia answer, $0.10 swing in the price of a $1 stock is a 10% change.) Also, many fraudsters work in the area of penny stocks.  No company wants to be associated with that."
+      },
+      {
+        "n": 3,
+        "doc_id": "63044",
+        "text": "You'd need millions of dollars to trade the number of shares it would take to profit from these penny variations.  What you bring up here is the way high frequency firms front-run trades and profit on these pennies. Say you have a trade commission of $5.  Every time you buy you pay $5, every time you sell you pay $5.  So you need a gain in excess of $10, a 10% gain on $100.  Now if you wanted to trade on a penny movement from $100 to $100.01, you need to have bought 1,000 shares totaling $100,000 for the $0.01 price movement to cover your commission costs.  If you had $1,000,000 to put at risk, that $0.01 price movement would net you $90 after commission, $10,000,000 would have made you $990.  You need much larger gains at the retail level because commissions will equate to a significant percentage of the money you're investing. Very large trading entities have much different arrangements and costs with the exchanges.  They might not pay a fee on each transaction but something that more closely resembles a subscription fee, and costs something that more closely resembles a house. Now to your point, catching these price movements and profiting.  The way high frequency trading firms purportedly make money relates to having a very low latency network connection to a particular exchange.  Their very low latency/very fast network connection lets them see orders and transact orders before other parties.   Say some stock has an ask at $101 x 1,000 shares.  The next depth is $101.10.  You see a market buy order come in for 1,000 shares and place a buy order for 1,000 shares at $101 which hits the exchange first, then immediately place a sell order at $101.09, changing the ask from $101.00 to $101.09 and selling in to the market order for a gain of $0.09 per share."
+      },
+      {
+        "n": 4,
+        "doc_id": "139089",
+        "text": "The penny pilot program has a dramatic effect on increasing options liquidity. Bids can be posted at .01 penny increments instead of .05 increments. A lot of money is lost dealing with .05 increments. Issues are added to the penny pilot program based on existing liquidity in both the stock and the options market, but the utility of the penny pilot program outweighs the discretionary liquidity judgement that the CBOE makes to list issues in that program. The reason the CBOE doesn't list all stocks in the penny pilot program is because they believe that their data vendors cannot handle all of the market data. But they have been saying this since 2006 and storage and bandwidth technology has greatly improved since then."
+      },
+      {
+        "n": 5,
+        "doc_id": "72633",
+        "text": "The $500 minimum is a policy of the ASX. As such any broker that offered a different policy would not be offering direct purchase of exchange traded shares. Note however that this policy applies only to the initial purchase. From the CMC FAQs: The ASX requires a minimum parcel of $500 to be traded if you don’t currently hold that particular security. Once you have $500 worth of an individual security, you can purchase any value of shares you like."
+      },
+      {
+        "n": 6,
+        "doc_id": "367047",
+        "text": "I recently bought a stock -  which was priced exactly as your question ponders, to the 1/100 cent. I happened to buy 2000 shares, but just a round lot of 100 would be enough to create no need for rounding.  It's common for industry to price this way as well, where an electronic component purchased by the thousands, is priced to the tenth or hundredth of a cent.  There's nothing magic about this, and you'll have more to ponder when your own lowest unit of currency is no longer minted. (I see you are in UK. Here, in the US, there's talk of dropping our cent. A 5 cent piece to be the smallest value coin. Yet, any non-cash transactions, such as checks, credit card purchases, etc, will still price to the penny.) To specifically answer the question - it's called decimal currency. 1/10, 1/100 of a cent."
+      },
+      {
+        "n": 7,
+        "doc_id": "44601",
+        "text": "The All Ords Index consists of the 500 largest companies by market capitalisation listed on the Australia Stock Exchange.  Each stock in the All Ords. Index is given a weighting based on its market capitalisation. As the price of the stocks within the All Ords. Index change, so does the points on the index itself.  The Index is more sensitive to changes in the larger capitalised stocks due to their larger weighting in the Index. Example: If a company has a weighting of 10% and its price goes up by 10%, and all other stocks in the Index don't go up or down, then this will cause the All Ords Index to go up by 1% (10% of 10%)."
+      },
+      {
+        "n": 8,
+        "doc_id": "347992",
+        "text": "A stock is only worth what someone is willing to pay for it. If it trades different values on different days, that means someone was willing to pay a higher price OR someone was willing to sell at a lower price.  There is no rule to prevent a stock from trading at $10 and then $100 the very next trade... or $1 the very next trade. (Though exchanges or regulators may halt trading, cancel trades, or impose limits on large price movements as they deem necessary, but this is beside the point I'm trying to illustrate). Asking what happens from the close of one day to the open of the next is like asking what happens from one trade to the next trade... someone simply decided to sell or pay a different price.  Nothing needs to have happened in between."
+      }
+    ],
+    "answer": "The FiQA posts I found don’t directly explain ASX tick sizes or why prices above $2.00 can move in $0.005 steps. They only cover related ideas like exchange rules, minimum parcels, and that price increments can be set by market structure rather than “real” value changes [5][6][8].\n\nSo I can’t answer that precisely from the retrieved posts.",
+    "error": null
+  },
+  "retrieval": {
+    "hit": false,
+    "first_rank": null,
+    "mrr": 0.0,
+    "stage_recall": {
+      "bm25": 0.0,
+      "dense": 0.0,
+      "rrf": 0.0,
+      "rerank": 0.0
+    }
+  },
+  "judgement": {
+    "relevance": 5,
+    "declined": true,
+    "claims": [
+      {
+        "text": "The posts do not directly explain ASX tick sizes or why prices above $2.00 can move in $0.005 steps.",
+        "cites": [
+          5,
+          6,
+          8
+        ],
+        "verdict": "supported"
+      },
+      {
+        "text": "The posts only cover related ideas like exchange rules, minimum parcels, and that price increments can be set by market structure rather than real value changes.",
+        "cites": [
+          5,
+          6,
+          8
+        ],
+        "verdict": "supported"
+      }
+    ],
+    "reason": "The answer appropriately declines to answer from the provided posts, but its added explanation is only loosely supported and the posts do not actually explain the ASX $0.005 tick-size rule."
+  },
+  "error": null,
+  "hallucinated": false,
+  "failed": true
+}

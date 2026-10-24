@@ -1,0 +1,20 @@
+# Secrets never enter the image; Railway passes keys as environment variables.
+**/.env
+**/.env.*
+
+# Rebuilt or downloaded inside the image.
+**/node_modules
+frontend/dist
+backend/.venv
+backend/data
+
+# Not needed at runtime.
+.git
+.claude
+.superpowers
+docs
+backend/tests
+backend/evals
+**/__pycache__
+**/.pytest_cache
+**/.ruff_cache
