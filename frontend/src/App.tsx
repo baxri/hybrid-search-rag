@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react'
 import { ChatPane } from './components/ChatPane'
 import { ArchitecturePage } from './components/ArchitecturePage'
 import { EvalPage } from './components/eval/EvalPage'
+import { GitHubLink } from './components/GitHubLink'
 import { Landing } from './components/Landing'
 import { PipelinePanel } from './components/PipelinePanel'
 import { useChat } from './hooks/useChat'
+import { DOCS_URL } from './lib/links'
 
 export default function App() {
   const { turns, send, retry, selectedTurnId, select } = useChat()
@@ -62,6 +64,15 @@ export default function App() {
               Pipeline
             </button>
           )}
+          <a
+            href={DOCS_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-md px-2 py-1 text-sm text-slate-600 hover:text-slate-900"
+          >
+            Docs
+          </a>
+          <GitHubLink className="text-slate-500 hover:bg-slate-100 hover:text-slate-900" />
         </div>
       </header>
 

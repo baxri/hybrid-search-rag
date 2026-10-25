@@ -1,6 +1,8 @@
 import { useEvalReport } from '../hooks/useEvalReport'
 import { EXAMPLE_QUESTIONS } from '../lib/examples'
 import { pct } from '../lib/evalTypes'
+import { DOCS_URL } from '../lib/links'
+import { GitHubLink } from './GitHubLink'
 
 interface Props {
   onTry: () => void
@@ -11,7 +13,7 @@ const PIPELINE = [
   {
     step: '01',
     title: 'Search two ways',
-    body: 'BM25 catches exact terms like "ESPP" or "401(k)". Embeddings catch meaning: "rainy-day fund" finds "short-term savings". Both run at once.',
+    body: 'BM25 catches exact terms like "ESPP" or "401(k)". Embeddings catch meaning: "rainy-day fund" finds "short-term savings". Both run at once, in memory.',
   },
   {
     step: '02',
@@ -33,7 +35,7 @@ const PIPELINE = [
 const WHY = [
   {
     title: 'It fits in memory',
-    body: '57,638 posts × 1,536 dimensions is a 354 MB NumPy matrix. Searching it is one matrix multiply: exact, no approximate index, no extra service to run.',
+    body: 'Both indexes load into the app’s memory at startup: the BM25 keyword index and a 354 MB NumPy matrix of 57,638 × 1,536 embeddings. Dense search is one matrix multiply: exact, no approximate index, no extra service to run.',
   },
   {
     title: 'Keywords still matter',
@@ -175,6 +177,14 @@ export function Landing({ onTry, onAsk }: Props) {
             <a href="#eval" className="hidden px-2 text-slate-300 hover:text-white sm:inline">
               Evaluation
             </a>
+            <a
+              href={DOCS_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="hidden px-2 text-slate-300 hover:text-white sm:inline"
+            >
+              Docs
+            </a>
             <button
               type="button"
               onClick={onTry}
@@ -182,21 +192,23 @@ export function Landing({ onTry, onAsk }: Props) {
             >
               Try it
             </button>
+            <GitHubLink className="text-slate-300 hover:bg-white/10 hover:text-white" />
           </div>
         </nav>
 
         <header className="mx-auto grid max-w-6xl items-center gap-12 px-6 pt-10 pb-20 lg:grid-cols-2 lg:pt-16 lg:pb-28">
           <div>
             <div className="mb-5 inline-flex rounded-full bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-300 ring-1 ring-blue-400/30">
-              Hybrid search · reranking · cited answers
+              In-memory hybrid search · reranking · cited answers
             </div>
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
               RAG without a <span className="text-blue-400">vector database</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
-              Ask a personal-finance question. Keyword search and embeddings run side by side over
-              57,638 forum posts, a reranker keeps the best 8, and every claim in the answer cites
-              its source. The embeddings live in a plain NumPy matrix: no vector DB required.
+              Ask a personal-finance question. BM25 keyword search and dense embedding search run
+              side by side, in memory, over 57,638 forum posts. A reranker keeps the best 8, and
+              every claim in the answer cites its source. The embeddings are a plain NumPy matrix
+              and BM25 is an in-process index: no vector DB, no search service.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <TryButton onClick={onTry} />
