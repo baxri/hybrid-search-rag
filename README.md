@@ -68,7 +68,7 @@ candidates). Rerank found 69%, but it only keeps the top 8.
 | Layer     | Tools                                                                           |
 | --------- | ------------------------------------------------------------------------------- |
 | Backend   | Python 3.12, FastAPI, Pydantic AI, `bm25s`, NumPy, `uv`                          |
-| Models    | OpenAI `gpt-5.4-mini` (chat) and `text-embedding-3-small`, Cohere `rerank-v4.0-fast` |
+| Models    | OpenAI `gpt-5.4-mini` (chat) and `text-embedding-3-small`, Cohere `rerank-v4.0-pro` |
 | Frontend  | React 19, TypeScript, Vite, Tailwind CSS 4                                       |
 | Data      | Prebuilt indexes on [Hugging Face](https://huggingface.co/datasets/baxri/fiqa-hybrid-indexes) (~400 MB) |
 | Deploy    | Docker, Railway                                                                  |
@@ -117,6 +117,13 @@ Settings are read from environment variables, or from `backend/.env`:
 | `CANDIDATE_K`     | `50`           | Candidates from each of BM25 and dense  |
 | `TOP_K`           | `8`            | Posts kept after reranking              |
 | `RRF_K`           | `60`           | RRF smoothing constant                  |
+| `RERANK_MODEL`    | `rerank-v4.0-pro` | Cohere reranker                      |
+| `DATA_DIR`        | `backend/data` | Where the indexes are loaded from       |
+| `INSTRUCTIONS_FILE` | built-in FiQA text | Your own agent instructions       |
+| `SEARCH_TOOL_NAME` | `search_finance_posts` | The search tool's name for the model |
+| `SEARCH_TOOL_DESCRIPTION` | FiQA description | What the model is told it searches |
+
+To run it on your own documents, see [Using your own data](docs/USING_YOUR_DATA.md).
 
 ## Tests and evals
 
@@ -157,11 +164,11 @@ backend/
     citations.py     numbers sources and formats them for the model
     stream.py        streams the agent's events to the UI
   evals/             question set, retrieval scoring, LLM judge, runner, report
-  scripts/           download/upload the prebuilt indexes on Hugging Face
+  scripts/           build indexes from your own documents; download/upload them on Hugging Face
   tests/
 frontend/src/
   components/        chat, pipeline panel, sources, landing page, architecture page, eval/
-docs/                design specs and implementation plans
+docs/                guide to using your own data, design specs and implementation plans
 Dockerfile           multi-stage build: React build + Python runtime with indexes
 ```
 

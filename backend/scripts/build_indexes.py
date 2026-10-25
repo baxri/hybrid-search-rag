@@ -9,7 +9,7 @@ cited on its own as "<id>#<n>"; a document that fits in one chunk keeps its id.
         [--chunk-words 300] [--overlap-words 50]
 
 Writes the layout the app loads: <out>/corpus.parquet, <out>/bm25/, <out>/embeddings.npy.
-Embedding calls OpenAI with OPENAI_API_KEY from backend/.env (about $0.02 per million words).
+Embedding calls OpenAI with OPENAI_API_KEY from backend/.env (about $0.03 per million words).
 """
 
 import argparse
