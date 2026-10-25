@@ -11,6 +11,7 @@ from evals.retrieval import STAGES, RetrievalScore, score_retrieval
 from evals.transcript import Transcript
 
 LOW_RELEVANCE = 2  # a relevance score at or below this is a failure
+UNGROUNDED = ("unsupported", "uncited")  # a "not_a_claim" statement is never one
 
 
 class QuestionResult(BaseModel):
@@ -34,7 +35,7 @@ def make_result(
     retrieval = score_retrieval(transcript.searches, question.relevant_doc_ids) if fiqa else None
 
     hallucinated = judgement is not None and (
-        any(c.verdict != "supported" for c in judgement.claims)
+        any(c.verdict in UNGROUNDED for c in judgement.claims)
         or (not fiqa and not judgement.declined)
     )
     failed = (
@@ -65,8 +66,8 @@ class Summary(BaseModel):
     stage_recall: dict[StageName, float]
     # Judge-based; None when nothing was judged
     relevance_avg: float | None  # judged FiQA answers
-    grounded_rate: float | None  # supported claims / all claims, every judged answer
-    hallucination_rate: float | None  # judged answers with any claim not supported
+    grounded_rate: float | None  # supported / factual claims (not not_a_claim), every judged answer
+    hallucination_rate: float | None  # judged answers with any unsupported or uncited claim
     declined_correctly: int  # unanswerable questions that declined without inventing facts
 
 
@@ -92,7 +93,7 @@ def _mean(values: list[float]) -> float | None:
 def summarize(results: list[QuestionResult]) -> Summary:
     retrieval = [r.retrieval for r in results if r.retrieval is not None]
     judged = [(r.question, r.judgement, r) for r in results if r.judgement is not None]
-    claims = [c for _, j, _ in judged for c in j.claims]
+    claims = [c for _, j, _ in judged for c in j.claims if c.verdict != "not_a_claim"]
     return Summary(
         fiqa_total=len(retrieval),
         unanswerable_total=sum(r.question.kind == "unanswerable" for r in results),

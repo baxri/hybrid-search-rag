@@ -43,17 +43,17 @@ LLM judge.
 
 | Metric                                        | Score    |
 | --------------------------------------------- | -------- |
-| Hit@8 (a labeled post in the final top 8)     | **62%**  |
-| MRR                                           | **0.49** |
+| Hit@8 (a labeled post in the final top 8)     | **76%**  |
+| MRR                                           | **0.58** |
 | Answer relevance (judge, 1–5)                 | **5.0**  |
-| Grounded claims                               | **98%**  |
-| Answers with any unsupported claim            | **8.6%** |
-| Unanswerable questions correctly declined     | **6 / 8** |
+| Grounded claims                               | **99%**  |
+| Answers with any unsupported claim            | **3.4%** |
+| Unanswerable questions correctly declined     | **8 / 8** |
 
-How many labeled posts each stage found: BM25 47%, dense 64%, RRF 64% (all from the top 50
-candidates). Rerank found 46%, but it only keeps the top 8.
+How many labeled posts each stage found: BM25 42%, dense 65%, RRF 64% (all from the top 50
+candidates). Rerank found 58%, but it only keeps the top 8.
 
-*Run from 2026-10-24, `gpt-5.4-mini` for answers and judging. Full results are in
+*Run from 2026-10-25, `gpt-5.4-mini` for answers and judging. Full results are in
 [`frontend/public/eval/results.json`](frontend/public/eval/results.json). Past runs are in
 [`backend/evals/runs/`](backend/evals/runs/).*
 
@@ -127,9 +127,9 @@ npm test
 npm run lint
 ```
 
-A full eval run costs between a few cents and about a dollar. With a Cohere trial key,
-reranking is limited to 10 calls a minute, so the runner goes one question at a time and
-retries when it hits the limit.
+A full eval run costs between a few cents and about a dollar and takes about a minute
+(8 questions at a time). With a Cohere trial key, reranking is limited to 10 calls a minute:
+run with `--concurrency 1`, and the runner retries when it hits the limit.
 
 ## Deploy to Railway
 

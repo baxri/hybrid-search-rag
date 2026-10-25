@@ -33,6 +33,11 @@ def test_unsupported_or_uncited_claim_is_a_hallucination():
         assert (result.hallucinated, result.failed) == (True, True)
 
 
+def test_a_statement_that_is_not_a_claim_is_not_a_hallucination():
+    result = make_result(FIQA, FOUND, judgement("supported", "not_a_claim"))
+    assert (result.hallucinated, result.failed) == (False, False)
+
+
 def test_retrieval_miss_or_low_relevance_fails_without_hallucinating():
     missed = make_result(FIQA, MISSED, judgement("supported"))
     off_topic = make_result(FIQA, FOUND, judgement("supported", relevance=2))
@@ -67,7 +72,7 @@ def test_an_error_is_a_failure_not_a_pass():
 
 def test_summary_math():
     results = [
-        make_result(FIQA, FOUND, judgement("supported", "supported", relevance=5)),
+        make_result(FIQA, FOUND, judgement("supported", "supported", "not_a_claim")),
         make_result(FIQA, MISSED, judgement("supported", "unsupported", relevance=3)),
         make_result(FIQA, Transcript(error="boom"), None),
         make_result(UNANSWERABLE, Transcript(answer="Not covered."), judgement(declined=True)),
@@ -81,6 +86,6 @@ def test_summary_math():
     assert s.mrr == 1 / 3
     assert s.stage_recall["bm25"] == 1 / 3
     assert s.relevance_avg == 4.0  # FiQA answers that were judged
-    assert s.grounded_rate == 3 / 5  # supported claims over all claims
+    assert s.grounded_rate == 3 / 5  # supported over factual claims; not_a_claim left out
     assert s.hallucination_rate == 2 / 4  # over judged answers
     assert s.declined_correctly == 1

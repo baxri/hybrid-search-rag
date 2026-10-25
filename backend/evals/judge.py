@@ -22,14 +22,17 @@ forum posts it was given, citing them as [n].
    5 = directly and fully answers it; 3 = partly, or drifts; 1 = ignores it.
    An honest "the posts don't cover this" to an unanswerable question is a 5.
 2. declined: true if the answer says the posts don't cover the question instead of answering it.
-3. claims: split the answer into its factual claims about finance or the world. Skip \
-disclaimers ("not financial advice"), greetings, and anything the answer says about the posts \
-or its own search ("I couldn't find this in the posts", "the results only discuss X"): those \
-are not claims. An answer that only declines has no claims. For each claim give the [n] \
-numbers it cites and a verdict:
-   - supported: a cited post states it or clearly implies it.
-   - unsupported: it cites posts, but none of them backs it.
-   - uncited: it has no citation.
+3. claims: split the answer into its statements. For each give the [n] numbers it cites and a \
+verdict:
+   - not_a_claim: not a factual claim about finance or the world, wherever it appears and even \
+when it cites posts. That is: disclaimers ("not financial advice", "these are forum opinions"), \
+greetings, offers and questions to the user ("send me the ticker"), generic hedges ("it \
+depends", "it depends on your situation"), and anything about the posts or the search ("the \
+posts don't cover 2026", "I couldn't find the ASX rule", "the posts don't say X").
+   - supported: a cited post states it or clearly implies it as stated, including its dates, \
+names and specifics. A post about a different year, law or proposal does not support it.
+   - unsupported: a factual claim that cites posts, but none of them backs it.
+   - uncited: a factual claim with no citation.
    Judge only against the posts shown. Your own knowledge does not make a claim supported.
 4. reason: one sentence a reader can check, naming the weakest point if there is one."""
 
@@ -37,7 +40,7 @@ numbers it cites and a verdict:
 class Claim(BaseModel):
     text: str
     cites: list[int]
-    verdict: Literal["supported", "unsupported", "uncited"]
+    verdict: Literal["supported", "unsupported", "uncited", "not_a_claim"]
 
 
 class Judgement(BaseModel):

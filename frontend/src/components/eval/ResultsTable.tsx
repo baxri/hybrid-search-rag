@@ -12,7 +12,8 @@ function Found({ result }: { result: QuestionResult }) {
 }
 
 function Claims({ result }: { result: QuestionResult }) {
-  const claims = result.judgement?.claims
+  // Disclaimers, hedges and statements about the posts aren't factual claims.
+  const claims = result.judgement?.claims.filter((c) => c.verdict !== 'not_a_claim')
   if (!claims) return <span className="text-slate-400">—</span>
   if (!claims.length)
     return <span className="text-slate-500">{result.judgement?.declined ? 'declined' : '0'}</span>

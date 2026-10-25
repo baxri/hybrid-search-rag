@@ -30,7 +30,7 @@ logger = logging.getLogger(__name__)
 
 RESULTS_PATH = BACKEND_DIR.parent / "frontend" / "public" / "eval" / "results.json"
 RUNS_DIR = BACKEND_DIR / "evals" / "runs"
-CONCURRENCY = 1  # Cohere's trial key allows 10 rerank calls a minute
+CONCURRENCY = 8  # a production Cohere key; a trial key (10 reranks a minute) needs 1
 RETRIES = 2  # a question that errors (usually a rate limit) is tried again...
 RETRY_WAIT_S = 60.0  # ...after the rate-limit window has passed
 
@@ -107,7 +107,7 @@ def write_report(report: EvalReport, latest: Path, runs_dir: Path) -> Path:
     return run_file
 
 
-async def main(limit: int | None, out: Path) -> None:
+async def main(limit: int | None, out: Path, concurrency: int) -> None:
     settings = get_settings()
     provider = OpenAIProvider(api_key=settings.openai_api_key)
     agent = build_agent(OpenAIResponsesModel(settings.chat_model, provider=provider))
@@ -115,7 +115,7 @@ async def main(limit: int | None, out: Path) -> None:
     pipeline = HybridPipeline.from_settings(settings)
 
     questions = load_questions()[:limit]
-    results = await evaluate(questions, agent, pipeline, judge)
+    results = await evaluate(questions, agent, pipeline, judge, concurrency)
     report = EvalReport(
         meta=RunMeta(
             date=datetime.now(UTC).isoformat(timespec="seconds"),
@@ -141,6 +141,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--limit", type=int, default=None, help="only the first N questions")
     parser.add_argument("--out", type=Path, default=RESULTS_PATH)
+    parser.add_argument("--concurrency", type=int, default=CONCURRENCY)
     args = parser.parse_args()
     logging.basicConfig(level=logging.INFO, format="%(message)s")
-    asyncio.run(main(args.limit, args.out))
+    asyncio.run(main(args.limit, args.out, args.concurrency))

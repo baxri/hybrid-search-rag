@@ -9,6 +9,7 @@ const VERDICT_STYLE: Record<Verdict, string> = {
   supported: 'bg-emerald-50 text-emerald-700',
   unsupported: 'bg-red-50 text-red-700',
   uncited: 'bg-amber-50 text-amber-700',
+  not_a_claim: 'bg-slate-100 text-slate-600',
 }
 
 const STAGE_LABEL: Record<StageName, string> = {
@@ -144,7 +145,7 @@ export function ResultDetail({ result, onTry }: Props) {
                   <span
                     className={`shrink-0 rounded px-1.5 py-0.5 text-xs font-medium ${VERDICT_STYLE[c.verdict]}`}
                   >
-                    {c.verdict}
+                    {c.verdict.replaceAll('_', ' ')}
                   </span>
                   <span>
                     {c.text}

@@ -22,7 +22,7 @@ export interface RetrievalScore {
   stage_recall: Record<StageName, number>
 }
 
-export type Verdict = 'supported' | 'unsupported' | 'uncited'
+export type Verdict = 'supported' | 'unsupported' | 'uncited' | 'not_a_claim'
 
 export interface Claim {
   text: string
