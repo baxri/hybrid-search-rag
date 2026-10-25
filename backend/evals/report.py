@@ -22,6 +22,7 @@ class QuestionResult(BaseModel):
     error: str | None
     hallucinated: bool
     failed: bool
+    labeled_posts: dict[str, str] = {}  # doc id -> text of each labeled post, for the report
 
 
 def make_result(
@@ -29,6 +30,7 @@ def make_result(
     transcript: Transcript,
     judgement: Judgement | None,
     error: str | None = None,
+    labeled_posts: dict[str, str] | None = None,
 ) -> QuestionResult:
     error = error or transcript.error
     fiqa = question.kind == "fiqa"
@@ -52,6 +54,7 @@ def make_result(
         error=error,
         hallucinated=hallucinated,
         failed=failed,
+        labeled_posts=labeled_posts or {},
     )
 
 

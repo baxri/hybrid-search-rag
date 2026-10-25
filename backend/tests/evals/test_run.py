@@ -30,6 +30,16 @@ async def test_every_question_gets_a_result_in_order():
     assert all(r.judgement is not None and not r.failed for r in results)
 
 
+async def test_each_result_carries_its_labeled_posts_text():
+    agent = build_agent(scripted_model(["emergency fund"]))
+    judge = build_judge(TestModel(custom_output_args=VERDICT))
+    pipeline = FakePipeline()
+
+    results = await evaluate(QUESTIONS[:1], agent, pipeline, judge)
+
+    assert results[0].labeled_posts == {"d0": pipeline.corpus.text("d0")}
+
+
 async def test_a_judge_crash_is_recorded_on_that_question():
     def broken(messages: list[ModelMessage], info: AgentInfo) -> ModelResponse:
         raise RuntimeError("judge offline")

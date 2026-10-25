@@ -42,6 +42,7 @@ async def evaluate_question(
     judge: Agent[None, Judgement],
     retry_wait: float = RETRY_WAIT_S,
 ) -> QuestionResult:
+    labeled = {d: pipeline.corpus.text(d) for d in question.relevant_doc_ids}
     transcript = await collect(question.text, agent, pipeline)
     for _ in range(RETRIES):
         if not transcript.error:
@@ -50,13 +51,14 @@ async def evaluate_question(
         await asyncio.sleep(retry_wait)
         transcript = await collect(question.text, agent, pipeline)
     if transcript.error:
-        return make_result(question, transcript, None)
+        return make_result(question, transcript, None, labeled_posts=labeled)
     try:
         judgement = await judge_answer(judge, question.text, transcript)
     except Exception as exc:
         logger.exception("judge failed on question %s", question.id)
-        return make_result(question, transcript, None, error=f"Judge failed: {exc}")
-    return make_result(question, transcript, judgement)
+        error = f"Judge failed: {exc}"
+        return make_result(question, transcript, None, error=error, labeled_posts=labeled)
+    return make_result(question, transcript, judgement, labeled_posts=labeled)
 
 
 async def evaluate(

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { citedNumbers, sourceElementId } from '../../lib/citations'
 import type { QuestionResult, Verdict } from '../../lib/evalTypes'
-import type { SearchTrace, StageName } from '../../lib/types'
+import type { RankedDoc, SearchTrace, StageName } from '../../lib/types'
 import { AnswerText } from '../AnswerText'
 import { SourcesList } from '../SourcesList'
 
@@ -29,6 +29,84 @@ function ranksOf(docId: string, searches: SearchTrace[]): string {
     return `${STAGE_LABEL[stage]} ${hit.length ? `#${Math.min(...hit)}` : '—'}`
   })
   return parts.join(' · ')
+}
+
+const SHOWN = 8 // per stage until expanded; BM25 and dense keep 50 candidates each
+
+/** One stage's ranking as doc chips, labeled posts highlighted; long lists expand. */
+function StageRow({
+  label,
+  results,
+  labeled,
+}: {
+  label: string
+  results: RankedDoc[]
+  labeled: Set<string>
+}) {
+  const [all, setAll] = useState(false)
+  const shown = all ? results : results.slice(0, SHOWN)
+  return (
+    <div className="flex items-start gap-2">
+      <span className="w-14 shrink-0 pt-0.5 text-xs text-slate-500">{label}</span>
+      <div className="flex flex-wrap gap-1.5">
+        {shown.map((r) => (
+          <span
+            key={r.doc_id}
+            className={`rounded px-1.5 py-0.5 font-mono text-xs ${
+              labeled.has(r.doc_id)
+                ? 'bg-emerald-100 font-semibold text-emerald-800'
+                : 'bg-white text-slate-600 ring-1 ring-slate-200'
+            }`}
+          >
+            #{r.rank} {r.doc_id}
+          </span>
+        ))}
+        {results.length > SHOWN && (
+          <button
+            type="button"
+            onClick={() => setAll(!all)}
+            className="px-1 py-0.5 text-xs text-blue-600 hover:underline"
+          >
+            {all ? 'show less' : `+${results.length - SHOWN} more`}
+          </button>
+        )}
+      </div>
+    </div>
+  )
+}
+
+/** A labeled post's ranks per stage, with its text behind a toggle. */
+function LabeledPost({
+  docId,
+  text,
+  searches,
+}: {
+  docId: string
+  text: string | undefined
+  searches: SearchTrace[]
+}) {
+  const [open, setOpen] = useState(false)
+  return (
+    <li>
+      <div className="font-mono text-xs">
+        doc {docId}: <span className="text-slate-600">{ranksOf(docId, searches)}</span>
+        {text !== undefined && (
+          <button
+            type="button"
+            onClick={() => setOpen(!open)}
+            className="ml-2 font-sans text-blue-600 hover:underline"
+          >
+            {open ? 'hide text' : 'show text'}
+          </button>
+        )}
+      </div>
+      {open && (
+        <p className="mt-1.5 rounded-lg border border-slate-200 bg-white px-3 py-2 whitespace-pre-line text-slate-700">
+          {text?.trim() || '(empty post)'}
+        </p>
+      )}
+    </li>
+  )
 }
 
 function Heading({ children }: { children: string }) {
@@ -74,11 +152,14 @@ export function ResultDetail({ result, onTry }: Props) {
       {question.kind === 'fiqa' ? (
         <section>
           <Heading>Labeled correct posts</Heading>
-          <ul className="space-y-1">
+          <ul className="space-y-1.5">
             {question.relevant_doc_ids.map((id) => (
-              <li key={id} className="font-mono text-xs">
-                doc {id}: <span className="text-slate-600">{ranksOf(id, transcript.searches)}</span>
-              </li>
+              <LabeledPost
+                key={id}
+                docId={id}
+                text={result.labeled_posts?.[id]}
+                searches={transcript.searches}
+              />
             ))}
           </ul>
         </section>
@@ -91,29 +172,19 @@ export function ResultDetail({ result, onTry }: Props) {
 
       {transcript.searches.length > 0 && (
         <section>
-          <Heading>Retrieved top 8</Heading>
-          <div className="space-y-2">
+          <Heading>Retrieved</Heading>
+          <div className="space-y-3">
             {transcript.searches.map((t, i) => {
-              const top = t.stages.find((s) => s.name === 'rerank')?.results ?? []
+              const stage = (name: StageName) =>
+                t.stages.find((s) => s.name === name)?.results ?? []
               return (
-                <div key={i}>
+                <div key={i} className="space-y-1.5">
                   <div className="text-xs text-slate-500">
                     Search: <span className="italic">“{t.query}”</span>
                   </div>
-                  <div className="mt-1 flex flex-wrap gap-1.5">
-                    {top.map((r) => (
-                      <span
-                        key={r.doc_id}
-                        className={`rounded px-1.5 py-0.5 font-mono text-xs ${
-                          labeled.has(r.doc_id)
-                            ? 'bg-emerald-100 font-semibold text-emerald-800'
-                            : 'bg-white text-slate-600 ring-1 ring-slate-200'
-                        }`}
-                      >
-                        #{r.rank} {r.doc_id}
-                      </span>
-                    ))}
-                  </div>
+                  <StageRow label="BM25" results={stage('bm25')} labeled={labeled} />
+                  <StageRow label="Dense" results={stage('dense')} labeled={labeled} />
+                  <StageRow label="Top 8" results={stage('rerank')} labeled={labeled} />
                 </div>
               )
             })}

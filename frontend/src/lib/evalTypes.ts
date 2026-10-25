@@ -45,6 +45,7 @@ export interface QuestionResult {
   error: string | null
   hallucinated: boolean
   failed: boolean
+  labeled_posts?: Record<string, string> // doc id -> text; missing in runs before it was added
 }
 
 export interface Summary {
