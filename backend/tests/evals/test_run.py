@@ -81,11 +81,11 @@ class FlakyPipeline(FakePipeline):
         super().__init__()
         self.failures = failures
 
-    async def search(self, query: str):
+    async def search(self, query: str, question: str | None = None):
         if self.failures:
             self.failures -= 1
             raise RuntimeError("429 Too Many Requests")
-        return await super().search(query)
+        return await super().search(query, question)
 
 
 async def test_a_failed_question_is_retried_after_a_wait():

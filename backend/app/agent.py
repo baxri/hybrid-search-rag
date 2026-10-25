@@ -28,6 +28,7 @@ class ChatDeps:
     registry: SourceRegistry
     on_search: Callable[[int, str], Awaitable[None]]
     searches: int = 0
+    question: str | None = None  # the user's own words, only when they stand alone (first turn)
 
 
 @dataclass
@@ -51,7 +52,7 @@ async def search_finance_posts(ctx: RunContext[ChatDeps], query: str) -> ToolRet
     search_id = deps.searches
     await deps.on_search(search_id, query)
 
-    trace = await deps.pipeline.search(query)
+    trace = await deps.pipeline.search(query, question=deps.question)
     this_search, newly_numbered = deps.registry.add(trace, deps.pipeline.corpus)
 
     # The model sees only the numbered post text; the trace and sources ride along in

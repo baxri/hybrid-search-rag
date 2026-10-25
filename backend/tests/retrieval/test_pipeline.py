@@ -96,3 +96,65 @@ async def test_no_candidates_skips_rerank():
 
     assert stage(trace, "rerank").results == []
     assert reranker.calls == 0
+
+
+class PerQueryBM25:
+    """A different ranking per query; records every query it was asked."""
+
+    def __init__(self, rankings: dict[str, list[str]]) -> None:
+        self.rankings = rankings
+        self.queries: list[str] = []
+
+    def search(self, query: str, k: int) -> list[tuple[str, float]]:
+        self.queries.append(query)
+        return [(d, 1.0) for d in self.rankings.get(query, [])[:k]]
+
+
+class RecordingReranker(ReversingReranker):
+    def __init__(self) -> None:
+        super().__init__()
+        self.queries: list[str] = []
+
+    def rerank(self, query, docs, top_n):
+        self.queries.append(query)
+        return super().rerank(query, docs, top_n)
+
+
+async def test_reranks_against_the_users_own_question():
+    reranker = RecordingReranker()
+    pipeline = make_pipeline(FakeBM25(["d0"]), FakeDense(["d1"]), reranker=reranker)
+
+    await pipeline.search("emergency fund location", question="Where should I keep my savings?")
+
+    assert reranker.queries == ["Where should I keep my savings?"]
+
+
+async def test_searches_with_both_the_rewrite_and_the_question():
+    bm25 = PerQueryBM25({"rewrite": ["d0"], "question": ["d2"]})
+    pipeline = make_pipeline(bm25, FakeDense([]))
+
+    trace = await pipeline.search("rewrite", question="question")
+
+    assert sorted(bm25.queries) == ["question", "rewrite"]
+    assert {d.doc_id for d in stage(trace, "rrf").results} == {"d0", "d2"}
+    assert trace.query == "rewrite"
+
+
+async def test_question_identical_to_the_query_is_searched_once():
+    bm25 = PerQueryBM25({"q": ["d0"]})
+    reranker = RecordingReranker()
+    pipeline = make_pipeline(bm25, FakeDense([]), reranker=reranker)
+
+    await pipeline.search("q", question=" q ")
+
+    assert bm25.queries == ["q"]
+    assert reranker.queries == ["q"]
+
+
+async def test_without_a_question_it_reranks_with_the_query():
+    reranker = RecordingReranker()
+    pipeline = make_pipeline(FakeBM25(["d0"]), FakeDense(["d1"]), reranker=reranker)
+
+    await pipeline.search("standalone follow-up query")
+
+    assert reranker.queries == ["standalone follow-up query"]

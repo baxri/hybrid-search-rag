@@ -67,7 +67,13 @@ async def chat_events(
         await queue.put(SearchStarted(search_id=search_id, query=query))
 
     history, prompt = to_model_history(req.messages)
-    deps = ChatDeps(pipeline=pipeline, registry=SourceRegistry(), on_search=on_search)
+    deps = ChatDeps(
+        pipeline=pipeline,
+        registry=SourceRegistry(),
+        on_search=on_search,
+        # A follow-up ("what about for kids?") means nothing alone; the agent's rewrite is used.
+        question=None if history else prompt,
+    )
 
     async def run_agent() -> None:
         try:

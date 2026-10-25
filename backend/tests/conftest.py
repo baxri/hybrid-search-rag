@@ -30,9 +30,11 @@ class FakePipeline:
         self.ranking = ranking or ["d0", "d3"]
         self.error = error
         self.calls: list[str] = []
+        self.questions: list[str | None] = []
 
-    async def search(self, query: str) -> SearchTrace:
+    async def search(self, query: str, question: str | None = None) -> SearchTrace:
         self.calls.append(query)
+        self.questions.append(question)
         if self.error:
             raise self.error
         return canned_trace(query, self.ranking)

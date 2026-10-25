@@ -20,6 +20,7 @@ class Settings(BaseSettings):
     candidate_k: int = 50
     top_k: int = 8
     rrf_k: int = 60
+    rerank_model: str = "rerank-v4.0-pro"  # beat -fast by 8 points Hit@8 on the bench
 
 
 @lru_cache

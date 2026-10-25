@@ -84,3 +84,27 @@ def test_every_line_is_a_typed_chat_event():
 
     assert isinstance(parsed[1], SearchResult)
     assert parsed[1].sources[0].n == 1
+
+
+def test_first_message_is_passed_to_search_as_the_users_question():
+    pipeline = FakePipeline()
+
+    post_chat(pipeline)
+
+    assert pipeline.questions == ["Where should I keep my emergency fund?"]
+
+
+def test_follow_up_is_not_passed_as_a_question():
+    # "What about for kids?" means nothing alone; the agent's standalone rewrite is used instead.
+    pipeline = FakePipeline()
+    payload = {
+        "messages": [
+            {"role": "user", "content": "Where should I keep my emergency fund?"},
+            {"role": "assistant", "content": "In a savings account [1]."},
+            {"role": "user", "content": "What about for kids?"},
+        ]
+    }
+
+    post_chat(pipeline, payload)
+
+    assert pipeline.questions == [None]
