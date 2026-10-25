@@ -40,15 +40,19 @@ class FakePipeline:
         return canned_trace(query, self.ranking)
 
 
-def scripted_model(queries: list[str], answer: str = "Use a savings account [1].") -> FunctionModel:
-    """Calls search_finance_posts once per query (one per model step), then streams `answer`."""
+def scripted_model(
+    queries: list[str],
+    answer: str = "Use a savings account [1].",
+    tool_name: str = "search_finance_posts",
+) -> FunctionModel:
+    """Calls the search tool once per query (one per model step), then streams `answer`."""
 
     async def stream(messages: list[ModelMessage], info: AgentInfo) -> AsyncIterator:
         searches_done = sum(1 for m in messages for p in m.parts if p.part_kind == "tool-return")
         if searches_done < len(queries):
             yield {
                 0: DeltaToolCall(
-                    name="search_finance_posts",
+                    name=tool_name,
                     json_args=f'{{"query": "{queries[searches_done]}"}}',
                     tool_call_id=f"call-{searches_done}",
                 )

@@ -1,18 +1,23 @@
-"""The chat agent: one tool that runs the hybrid search and numbers what it found."""
+"""The chat agent: one tool that runs the hybrid search and numbers what it found.
+
+What it answers and how its tool is described is the Domain; the defaults are FiQA's.
+"""
 
 from collections.abc import Awaitable, Callable
 from dataclasses import dataclass
 
-from pydantic_ai import Agent, RunContext, ToolReturn
+from pydantic_ai import Agent, RunContext, Tool, ToolReturn
 from pydantic_ai.models import Model
 
 from app.citations import SourceRegistry, format_for_model
+from app.config import Settings
 from app.retrieval.pipeline import HybridPipeline
 from app.schemas import SearchTrace, Source
 
+# "{tool_name}" is replaced with the search tool's name, here and in custom instructions.
 INSTRUCTIONS = """\
 You answer personal-finance questions using posts from the FiQA forum corpus.
-- For any finance question, call search_finance_posts first. You may search again with a different query if the first results are weak. Rewrite follow-up questions into standalone search queries using the conversation.
+- For any finance question, call {tool_name} first. You may search again with a different query if the first results are weak. Rewrite follow-up questions into standalone search queries using the conversation.
 - Search queries are short: the user's question in their own words, or a few key terms. Never add words about the source ("forum", "FiQA", "posts", "discussion", "opinion", "explanation") and never pad with lists of synonyms.
 - Answer only from the returned posts. Cite every claim with the post's number in square brackets, e.g. [1] or [2][3]. Never cite a number you were not given in this turn.
 - Never answer from your own knowledge. If a question isn't about personal finance, say you can only answer from the finance forum posts.
@@ -22,6 +27,31 @@ You answer personal-finance questions using posts from the FiQA forum corpus.
 - Don't offer follow-ups you can't do: all you can do is search these posts.
 - Keep answers concise. These are forum opinions, not financial advice; say that in one short line only when giving a recommendation.
 - For greetings or small talk, reply briefly without searching."""
+
+
+@dataclass(frozen=True)
+class Domain:
+    """What the assistant answers and how its search tool is presented to the model."""
+
+    instructions: str = INSTRUCTIONS
+    tool_name: str = "search_finance_posts"
+    tool_description: str = (
+        "Search the FiQA personal-finance forum (BM25 + embeddings, fused and reranked)."
+    )
+
+    @classmethod
+    def from_settings(cls, settings: Settings) -> "Domain":
+        instructions = (
+            settings.instructions_file.read_text() if settings.instructions_file else INSTRUCTIONS
+        )
+        return cls(
+            instructions=instructions,
+            tool_name=settings.search_tool_name,
+            tool_description=settings.search_tool_description,
+        )
+
+
+FIQA = Domain()
 
 
 @dataclass
@@ -44,8 +74,8 @@ class SearchMetadata:
     sources: list[Source]  # newly numbered in this search
 
 
-async def search_finance_posts(ctx: RunContext[ChatDeps], query: str) -> ToolReturn:
-    """Search the FiQA personal-finance forum (BM25 + embeddings, fused and reranked).
+async def search(ctx: RunContext[ChatDeps], query: str) -> ToolReturn:
+    """Run the hybrid search. The model sees the Domain's tool name and description instead.
 
     Args:
         query: A short standalone query in the user's words; rewrite follow-ups using the
@@ -67,11 +97,12 @@ async def search_finance_posts(ctx: RunContext[ChatDeps], query: str) -> ToolRet
     )
 
 
-def build_agent(model: Model | str) -> Agent[ChatDeps, str]:
+def build_agent(model: Model | str, domain: Domain = FIQA) -> Agent[ChatDeps, str]:
+    tool = Tool(search, name=domain.tool_name, description=domain.tool_description)
     return Agent(
         model,
         deps_type=ChatDeps,
         output_type=str,
-        instructions=INSTRUCTIONS,
-        tools=[search_finance_posts],
+        instructions=domain.instructions.replace("{tool_name}", domain.tool_name),
+        tools=[tool],
     )

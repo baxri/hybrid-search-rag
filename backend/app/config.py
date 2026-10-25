@@ -22,6 +22,14 @@ class Settings(BaseSettings):
     rrf_k: int = 60
     rerank_model: str = "rerank-v4.0-pro"  # beat -fast by 8 points Hit@8 on the bench
 
+    # The domain: defaults are FiQA's personal-finance forum. For your own documents, see
+    # docs/USING_YOUR_DATA.md.
+    instructions_file: Path | None = None  # replaces the built-in agent instructions
+    search_tool_name: str = "search_finance_posts"
+    search_tool_description: str = (
+        "Search the FiQA personal-finance forum (BM25 + embeddings, fused and reranked)."
+    )
+
 
 @lru_cache
 def get_settings() -> Settings:

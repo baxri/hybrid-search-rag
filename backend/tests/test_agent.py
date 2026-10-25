@@ -1,7 +1,8 @@
 from pydantic_ai.messages import FunctionToolResultEvent
 
-from app.agent import ChatDeps, build_agent
+from app.agent import ChatDeps, Domain, build_agent
 from app.citations import SourceRegistry
+from app.config import Settings
 from tests.conftest import FakePipeline, scripted_model
 
 
@@ -50,3 +51,55 @@ async def test_two_searches_get_ids_1_and_2():
     # Same canned posts both times: the second search adds no new sources.
     assert results[1].part.metadata.sources == []
     assert results[1].part.content.startswith("[1] ")
+
+
+async def test_a_custom_domain_names_the_tool_and_sets_the_instructions():
+    seen: dict = {}
+    model = scripted_model(["leave policy"], tool_name="search_handbook")
+    inner = model.stream_function
+
+    async def spy(messages, info):
+        seen["tools"] = [(t.name, t.description) for t in info.function_tools]
+        seen["instructions"] = info.instructions
+        async for chunk in inner(messages, info):
+            yield chunk
+
+    model.stream_function = spy
+    domain = Domain(
+        instructions="Answer HR questions. Call {tool_name} first.",
+        tool_name="search_handbook",
+        tool_description="Search the employee handbook.",
+    )
+    pipeline = FakePipeline()
+    deps = ChatDeps(pipeline=pipeline, registry=SourceRegistry(), on_search=noop)
+
+    async with build_agent(model, domain).run_stream_events("leave?", deps=deps) as stream:
+        async for _ in stream:
+            pass
+
+    assert pipeline.calls == ["leave policy"]
+    assert seen["tools"] == [("search_handbook", "Search the employee handbook.")]
+    assert seen["instructions"] == "Answer HR questions. Call search_handbook first."
+
+
+def test_domain_from_settings_reads_the_instructions_file(tmp_path):
+    path = tmp_path / "instructions.md"
+    path.write_text("Answer from the handbook.")
+    settings = Settings(
+        openai_api_key="k",
+        cohere_api_key="k",
+        instructions_file=path,
+        search_tool_name="search_handbook",
+        search_tool_description="Search the handbook.",
+    )
+
+    assert Domain.from_settings(settings) == Domain(
+        instructions="Answer from the handbook.",
+        tool_name="search_handbook",
+        tool_description="Search the handbook.",
+    )
+    assert Domain.from_settings(Settings(openai_api_key="k", cohere_api_key="k")) == Domain()
+
+
+async def noop(search_id: int, query: str) -> None:
+    pass

@@ -8,7 +8,7 @@ from pydantic_ai.models import Model
 from pydantic_ai.models.openai import OpenAIResponsesModel
 from pydantic_ai.providers.openai import OpenAIProvider
 
-from app.agent import build_agent
+from app.agent import FIQA, Domain, build_agent
 from app.config import BACKEND_DIR, get_settings
 from app.retrieval.pipeline import HybridPipeline
 from app.schemas import ChatRequest
@@ -21,21 +21,24 @@ def create_app(
     pipeline: HybridPipeline | None = None,
     model: Model | str | None = None,
     frontend_dir: Path = FRONTEND_DIR,
+    domain: Domain | None = None,
 ) -> FastAPI:
     """Build the app. Tests inject a fake pipeline and model; production loads real ones at startup."""
 
     @asynccontextmanager
     async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         chat_model = model
+        agent_domain = domain or FIQA
         if pipeline is None or chat_model is None:
             settings = get_settings()
+            agent_domain = domain or Domain.from_settings(settings)
             # Pass the key explicitly: settings read backend/.env, which os.environ doesn't see.
             chat_model = chat_model or OpenAIResponsesModel(
                 settings.chat_model, provider=OpenAIProvider(api_key=settings.openai_api_key)
             )
         # Indexes (~400 MB) load once here, never per request.
         app.state.pipeline = pipeline or HybridPipeline.from_settings(get_settings())
-        app.state.agent = build_agent(chat_model)
+        app.state.agent = build_agent(chat_model, agent_domain)
         yield
 
     app = FastAPI(title="Hybrid Search Chat", lifespan=lifespan)

@@ -18,7 +18,7 @@ from pydantic_ai import Agent
 from pydantic_ai.models.openai import OpenAIResponsesModel
 from pydantic_ai.providers.openai import OpenAIProvider
 
-from app.agent import ChatDeps, build_agent
+from app.agent import ChatDeps, Domain, build_agent
 from app.config import BACKEND_DIR, get_settings
 from app.retrieval.pipeline import HybridPipeline
 from evals.dataset import SEED, EvalQuestion, load_questions
@@ -112,7 +112,8 @@ def write_report(report: EvalReport, latest: Path, runs_dir: Path) -> Path:
 async def main(limit: int | None, out: Path, concurrency: int) -> None:
     settings = get_settings()
     provider = OpenAIProvider(api_key=settings.openai_api_key)
-    agent = build_agent(OpenAIResponsesModel(settings.chat_model, provider=provider))
+    model = OpenAIResponsesModel(settings.chat_model, provider=provider)
+    agent = build_agent(model, Domain.from_settings(settings))
     judge = build_judge(OpenAIResponsesModel(settings.judge_model, provider=provider))
     pipeline = HybridPipeline.from_settings(settings)
 
