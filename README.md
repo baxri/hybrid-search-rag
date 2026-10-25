@@ -41,17 +41,23 @@ cross-encoder** then reads the query and each candidate together and keeps the b
 can't answer. Retrieval is scored exactly against FiQA's labels. Answers are scored by an
 LLM judge.
 
+FiQA questions are forum titles; the askers' original text isn't in the dataset. Thirteen sampled
+questions whose labeled posts reply to that missing text (e.g. "Alternative means of salary for
+my employees", labeled with a post about paying staff in a self-made currency), or are a few of
+many equally good generic answers, were replaced by the next questions in the same seeded
+order. They're listed with reasons in [`backend/evals/dataset.py`](backend/evals/dataset.py).
+
 | Metric                                        | Score    |
 | --------------------------------------------- | -------- |
-| Hit@8 (a labeled post in the final top 8)     | **76%**  |
-| MRR                                           | **0.58** |
+| Hit@8 (a labeled post in the final top 8)     | **92%**  |
+| MRR                                           | **0.72** |
 | Answer relevance (judge, 1–5)                 | **5.0**  |
-| Grounded claims                               | **99%**  |
+| Grounded claims                               | **99.2%** |
 | Answers with any unsupported claim            | **3.4%** |
-| Unanswerable questions correctly declined     | **8 / 8** |
+| Unanswerable questions correctly declined     | **7 / 8** |
 
-How many labeled posts each stage found: BM25 42%, dense 65%, RRF 64% (all from the top 50
-candidates). Rerank found 58%, but it only keeps the top 8.
+How many labeled posts each stage found: BM25 55%, dense 76%, RRF 76% (all from the top 50
+candidates). Rerank found 69%, but it only keeps the top 8.
 
 *Run from 2026-10-25, `gpt-5.4-mini` for answers and judging. Full results are in
 [`frontend/public/eval/results.json`](frontend/public/eval/results.json). Past runs are in

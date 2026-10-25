@@ -1,6 +1,11 @@
 """The fixed question set: 50 FiQA test questions with known-correct posts, plus 8 the forum
 can't answer.
 
+FiQA questions are forum titles; the askers also wrote a body that FiQA doesn't include. A few
+sampled questions' labeled posts reply to that body, not the title, so no search can find them
+from the title. Those are listed in EXCLUDED with the reason, and the sample takes the next
+questions in the same seeded order instead; the rest of the sample is unchanged.
+
 Built once and committed, so every run scores the same questions:
     uv run python -m evals.dataset
 """
@@ -25,6 +30,26 @@ class EvalQuestion(BaseModel):
     relevant_doc_ids: list[str] = []  # FiQA's labeled correct posts; empty when unanswerable
 
 
+# Labeled posts that answer the hidden question body, not the title, or are a few of many
+# equally good generic answers. Excluded by reading the
+# labels, not by whether our system found them; their replacements are taken as they come.
+EXCLUDED = {
+    "4125": "Alternative means of salary: the label is about paying staff in a self-made currency",
+    "5080": "Expiring UTMA account: the label advises a student to use CDs and get through school",
+    "5427": "Auto-loan taxes for dependents: the label counts support for a mother and sister",
+    "2398": "Frustrated Landlord: the label is about renting below market to someone the asker knows",
+    "6909": "ASX $0.005 increments: the label is about hidden orders, not tick sizes",
+    "7803": "Delta and option premium: the labels are about Black-Scholes and Monte Carlo pricing",
+    "8513": "Buy on dip when earnings fail: the label answers 'is it cheap?', not the title",
+    "4777": "Finance repairs to sell: the label is about HELOC fees, assuming a HELOC was chosen",
+    "7269": "Quicken across rollovers: the label is about a Vanguard share-class conversion",
+    "1085": "Disputed debts on credit reports: the labels reply to a debt-collector story",
+    "715": "What would you do with $100K: three generic labels among many equally good posts",
+    "10975": "Roth IRA at the income limit: the top 8 already give the labeled backdoor-Roth answer",
+    "885": "Credit cards after you disappear: the labels read 'disappear' as dying",
+}
+
+
 def _unanswerable(n: int, text: str) -> EvalQuestion:
     return EvalQuestion(id=f"u{n}", text=text, kind="unanswerable")
 
@@ -47,16 +72,24 @@ UNANSWERABLE = [
 
 
 def sample_fiqa(
-    queries: pd.DataFrame, qrels: pd.DataFrame, n: int = SAMPLE_SIZE, seed: int = SEED
+    queries: pd.DataFrame,
+    qrels: pd.DataFrame,
+    n: int = SAMPLE_SIZE,
+    seed: int = SEED,
+    excluded: frozenset[str] = frozenset(EXCLUDED),
 ) -> list[EvalQuestion]:
-    """Sample `n` labeled test questions; queries has `_id, text`, qrels `query-id, corpus-id, score`."""
+    """Sample `n` labeled test questions, skipping `excluded` ones; queries has `_id, text`,
+    qrels `query-id, corpus-id, score`."""
     positive = qrels[qrels["score"] > 0]
     relevant: dict[str, list[str]] = {}
     for query_id, doc_id in zip(positive["query-id"], positive["corpus-id"], strict=True):
         relevant.setdefault(str(query_id), []).append(str(doc_id))
 
     labeled = queries[queries["_id"].astype(str).isin(relevant.keys())]
-    sample = labeled.sample(n=n, random_state=seed)
+    # A full seeded shuffle, then the first n not excluded: an excluded question is replaced by
+    # the next in this order and the rest of the sample stays the same.
+    order = labeled.sample(n=len(labeled), random_state=seed)
+    sample = order[~order["_id"].astype(str).isin(excluded)].head(n)
     return [
         EvalQuestion(id=str(qid), text=text, kind="fiqa", relevant_doc_ids=relevant[str(qid)])
         for qid, text in zip(sample["_id"], sample["text"], strict=True)

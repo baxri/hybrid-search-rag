@@ -27,28 +27,11 @@
     ]
   },
   {
-    "id": "6909",
-    "text": "Why do stocks priced above $2.00 on the ASX sometimes move in $0.005 increments?",
-    "kind": "fiqa",
-    "relevant_doc_ids": [
-      "127012"
-    ]
-  },
-  {
     "id": "4946",
     "text": "Something looks off about Mitsubishi financial data",
     "kind": "fiqa",
     "relevant_doc_ids": [
       "121690"
-    ]
-  },
-  {
-    "id": "4125",
-    "text": "Alternative means of salary for my employees",
-    "kind": "fiqa",
-    "relevant_doc_ids": [
-      "344648",
-      "72046"
     ]
   },
   {
@@ -87,14 +70,6 @@
     ]
   },
   {
-    "id": "5080",
-    "text": "Is there a standard or best practice way to handle money from an expiring UTMA account?",
-    "kind": "fiqa",
-    "relevant_doc_ids": [
-      "256055"
-    ]
-  },
-  {
     "id": "9329",
     "text": "Interactive Brokers: IOPTS and list of structured products",
     "kind": "fiqa",
@@ -110,14 +85,6 @@
     "relevant_doc_ids": [
       "272008",
       "404339"
-    ]
-  },
-  {
-    "id": "8513",
-    "text": "Buy on dip when earnings fail?",
-    "kind": "fiqa",
-    "relevant_doc_ids": [
-      "270573"
     ]
   },
   {
@@ -160,15 +127,6 @@
       "104726",
       "362919",
       "561929"
-    ]
-  },
-  {
-    "id": "1085",
-    "text": "How do disputed debts work on credit reports?",
-    "kind": "fiqa",
-    "relevant_doc_ids": [
-      "467737",
-      "393710"
     ]
   },
   {
@@ -237,15 +195,6 @@
     ]
   },
   {
-    "id": "5427",
-    "text": "How do auto-loan payments factor into taxes for cars that are solely used by dependent(s)?",
-    "kind": "fiqa",
-    "relevant_doc_ids": [
-      "200603",
-      "323284"
-    ]
-  },
-  {
     "id": "7734",
     "text": "Can PE ratio of stocks be compared to other investments?",
     "kind": "fiqa",
@@ -285,26 +234,6 @@
     "kind": "fiqa",
     "relevant_doc_ids": [
       "401329"
-    ]
-  },
-  {
-    "id": "4777",
-    "text": "How to finance necessary repairs to our home in order to sell it?",
-    "kind": "fiqa",
-    "relevant_doc_ids": [
-      "590710"
-    ]
-  },
-  {
-    "id": "2398",
-    "text": "Frustrated Landlord",
-    "kind": "fiqa",
-    "relevant_doc_ids": [
-      "118730",
-      "509391",
-      "363810",
-      "224654",
-      "590489"
     ]
   },
   {
@@ -434,15 +363,6 @@
     ]
   },
   {
-    "id": "7803",
-    "text": "Can the Delta be used to calculate the option premium given a certain target?",
-    "kind": "fiqa",
-    "relevant_doc_ids": [
-      "565926",
-      "157504"
-    ]
-  },
-  {
     "id": "1933",
     "text": "UK sole trader who often buys products/services on behalf of clients – do I deduct from declared income or claim as allowable expenses?",
     "kind": "fiqa",
@@ -474,6 +394,97 @@
       "272709",
       "327263",
       "331981"
+    ]
+  },
+  {
+    "id": "4102",
+    "text": "How can I determine if my rate of return is “good” for the market I am in?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "554734",
+      "241101",
+      "39115",
+      "448699"
+    ]
+  },
+  {
+    "id": "4037",
+    "text": "How separate individual expenses from family expenses in Gnucash?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "10275",
+      "298099"
+    ]
+  },
+  {
+    "id": "4047",
+    "text": "Does doing your “research”/“homework” on stocks make any sense?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "417840",
+      "452175",
+      "77652",
+      "324779"
+    ]
+  },
+  {
+    "id": "8072",
+    "text": "What does it mean “sell on ask” , “sell on bid” in stocks?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "394244",
+      "169062",
+      "31465"
+    ]
+  },
+  {
+    "id": "5906",
+    "text": "0% APR first 12 months on new credit card. Can I exceed that 30% rule of thumb and not hurt my credit score?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "409907",
+      "15172"
+    ]
+  },
+  {
+    "id": "8378",
+    "text": "Should I wait a few days to sell ESPP Stock?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "178684",
+      "102237",
+      "125298"
+    ]
+  },
+  {
+    "id": "2423",
+    "text": "At what age should I start or stop saving money?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "81106",
+      "396127",
+      "553288",
+      "551954",
+      "529444",
+      "305946",
+      "538023"
+    ]
+  },
+  {
+    "id": "4414",
+    "text": "Do high interest rates lead to higher bond yields or lower?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "235522",
+      "367137"
+    ]
+  },
+  {
+    "id": "1297",
+    "text": "Why aren't there solutions for electronic itemized receipt for retail in-store purchases?",
+    "kind": "fiqa",
+    "relevant_doc_ids": [
+      "171761"
     ]
   },
   {

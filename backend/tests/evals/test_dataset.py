@@ -48,6 +48,16 @@ def test_same_seed_gives_same_sample_of_size_n():
     assert [q.id for q in first] == [q.id for q in second]
 
 
+def test_excluded_questions_are_replaced_by_the_next_in_order():
+    original = [q.id for q in sample_fiqa(QUERIES, QRELS, n=3, seed=7, excluded=frozenset())]
+    full_order = [q.id for q in sample_fiqa(QUERIES, QRELS, n=6, seed=7, excluded=frozenset())]
+
+    replaced = sample_fiqa(QUERIES, QRELS, n=3, seed=7, excluded=frozenset({original[1]}))
+
+    assert full_order[:3] == original
+    assert [q.id for q in replaced] == [original[0], original[2], full_order[3]]
+
+
 def test_unanswerable_questions_have_no_labels():
     assert len(UNANSWERABLE) == 8
     assert len({q.id for q in UNANSWERABLE}) == 8
